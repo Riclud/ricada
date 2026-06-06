@@ -1,0 +1,20 @@
+type User {
+    name: string @min(10)
+    age: number @max(99)
+}
+
+/api
+    @description('Такая-то точка')
+    POST /users/:id
+        @description('Такой-то роут')
+        b name123: string @min(1) @max(100)
+
+        @description("Такое-то поле")
+        b age: number @min(100)
+
+        p id: string @toUpperCase
+        q page: number?
+        b objExample: User
+
+    GET /test/:id
+        p id?: number
