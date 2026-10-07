@@ -45,8 +45,8 @@ describe("ts-client emitter", () => {
     const code = byPath["ts-client/validators.ts"]!
     expect(code).toContain("export const validators")
     expect(code).toContain('Role: (v: unknown) => v === "admin"')
-    expect(code).toContain("Shape: (v: unknown) => validators.Circle(v) || validators.Square(v)")
-    expect(code).toContain('"listUsers": (v: unknown) => validators.PageOfUser(v)')
+    expect(code).toContain('Shape: (v: unknown) => validators["Circle"]!(v) || validators["Square"]!(v)')
+    expect(code).toContain('"listUsers": (v: unknown) => validators["PageOfUser"]!(v)')
   })
 
   test("generated code typechecks with tsc", async () => {

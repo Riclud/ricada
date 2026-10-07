@@ -154,7 +154,7 @@ export function checkRef(ref: IrTypeRef, accessor: string): string {
     case "null":
       return `${accessor} === null`
     case "named":
-      return `validators.${ref.name}(${accessor})`
+      return `validators[${JSON.stringify(ref.name)}]!(${accessor})`
   }
 }
 
