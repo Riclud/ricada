@@ -1,0 +1,1070 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`openapi emitter reference example OpenAPI snapshot 1`] = `
+{
+  "components": {
+    "schemas": {
+      "Address": {
+        "properties": {
+          "city": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+          },
+          "country": {
+            "default": "US",
+            "type": "string",
+          },
+          "street": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string",
+          },
+          "zip": {
+            "example": "90210",
+            "pattern": "^[0-9]{5}$",
+            "type": "string",
+          },
+        },
+        "required": [
+          "street",
+          "city",
+          "zip",
+          "country",
+        ],
+        "type": "object",
+      },
+      "BadRequest": {
+        "properties": {
+          "code": {
+            "default": "BAD_REQUEST",
+            "type": "string",
+          },
+          "message": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "message",
+          "code",
+        ],
+        "type": "object",
+      },
+      "Circle": {
+        "properties": {
+          "kind": {
+            "const": "circle",
+            "example": "circle",
+          },
+          "radius": {
+            "minimum": 0,
+            "type": "number",
+          },
+        },
+        "required": [
+          "kind",
+          "radius",
+        ],
+        "type": "object",
+      },
+      "Conflict": {
+        "properties": {
+          "code": {
+            "default": "CONFLICT",
+            "type": "string",
+          },
+          "message": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "message",
+          "code",
+        ],
+        "type": "object",
+      },
+      "FieldError": {
+        "properties": {
+          "field": {
+            "type": "string",
+          },
+          "reason": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "field",
+          "reason",
+        ],
+        "type": "object",
+      },
+      "Forbidden": {
+        "properties": {
+          "code": {
+            "default": "FORBIDDEN",
+            "type": "string",
+          },
+          "message": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "message",
+          "code",
+        ],
+        "type": "object",
+      },
+      "Id": {
+        "oneOf": [
+          {
+            "type": "string",
+          },
+          {
+            "type": "integer",
+          },
+        ],
+      },
+      "MaybeAddress": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Address",
+          },
+          {
+            "type": "null",
+          },
+        ],
+      },
+      "NotFound": {
+        "properties": {
+          "code": {
+            "default": "NOT_FOUND",
+            "type": "string",
+          },
+          "message": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "message",
+          "code",
+        ],
+        "type": "object",
+      },
+      "PageOfUser": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/User",
+            },
+            "type": "array",
+          },
+          "page": {
+            "minimum": 1,
+            "type": "integer",
+          },
+          "size": {
+            "minimum": 1,
+            "type": "integer",
+          },
+          "total": {
+            "minimum": 0,
+            "type": "integer",
+          },
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "size",
+        ],
+        "type": "object",
+      },
+      "Role": {
+        "enum": [
+          "admin",
+          "user",
+          "guest",
+        ],
+        "type": "string",
+      },
+      "ServerStats": {
+        "properties": {
+          "activeUsers": {
+            "type": "integer",
+          },
+          "requests": {
+            "type": "integer",
+          },
+          "users": {
+            "type": "integer",
+          },
+        },
+        "required": [
+          "users",
+          "activeUsers",
+          "requests",
+        ],
+        "type": "object",
+      },
+      "Session": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+          },
+          "expiresAt": {
+            "format": "date-time",
+            "type": "string",
+          },
+          "id": {
+            "type": "string",
+          },
+          "ip": {
+            "type": "string",
+          },
+          "userAgent": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "id",
+          "userAgent",
+          "ip",
+          "createdAt",
+          "expiresAt",
+        ],
+        "type": "object",
+      },
+      "Shape": {
+        "discriminator": {
+          "mapping": {
+            "Circle": "#/components/schemas/Circle",
+            "Square": "#/components/schemas/Square",
+          },
+          "propertyName": "kind",
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Circle",
+          },
+          {
+            "$ref": "#/components/schemas/Square",
+          },
+        ],
+      },
+      "Square": {
+        "properties": {
+          "kind": {
+            "const": "square",
+            "example": "square",
+          },
+          "side": {
+            "minimum": 0,
+            "type": "number",
+          },
+        },
+        "required": [
+          "kind",
+          "side",
+        ],
+        "type": "object",
+      },
+      "TooManyRequests": {
+        "properties": {
+          "code": {
+            "default": "TOO_MANY_REQUESTS",
+            "type": "string",
+          },
+          "message": {
+            "type": "string",
+          },
+          "retryAfter": {
+            "type": "integer",
+          },
+        },
+        "required": [
+          "message",
+          "code",
+          "retryAfter",
+        ],
+        "type": "object",
+      },
+      "Unauthorized": {
+        "properties": {
+          "code": {
+            "default": "UNAUTHORIZED",
+            "type": "string",
+          },
+          "message": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "message",
+          "code",
+        ],
+        "type": "object",
+      },
+      "User": {
+        "properties": {
+          "active": {
+            "default": "true",
+            "type": "boolean",
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address",
+          },
+          "age": {
+            "example": "30",
+            "maximum": 150,
+            "minimum": 0,
+            "type": "integer",
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+          },
+          "email": {
+            "example": "jane@example.com",
+            "format": "email",
+            "type": "string",
+          },
+          "id": {
+            "description": "Unique identifier",
+            "example": "550e8400-e29b-41d4-a716-446655440000",
+            "type": "string",
+          },
+          "name": {
+            "example": "Jane Doe",
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role",
+            "default": "user",
+          },
+          "score": {
+            "example": "4.5",
+            "maximum": 5,
+            "minimum": 0,
+            "type": "number",
+          },
+          "tags": {
+            "items": {
+              "type": "string",
+            },
+            "type": "array",
+          },
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "active",
+          "role",
+          "tags",
+          "createdAt",
+        ],
+        "type": "object",
+      },
+      "ValidationFailed": {
+        "properties": {
+          "fields": {
+            "items": {
+              "$ref": "#/components/schemas/FieldError",
+            },
+            "type": "array",
+          },
+          "message": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "message",
+          "fields",
+        ],
+        "type": "object",
+      },
+    },
+  },
+  "info": {
+    "title": "Ricada API",
+    "version": "0.0.0",
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/admin/deny": {
+      "post": {
+        "description": "Adds a key (JWT subject, API key or session) to the deny list. Delegates to the control plane.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "key": {
+                    "type": "string",
+                  },
+                  "ttl": {
+                    "example": "24h",
+                    "type": "string",
+                  },
+                },
+                "required": [
+                  "key",
+                ],
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": {
+          "204": {
+            "description": "",
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationFailed",
+                },
+              },
+            },
+            "description": "ValidationFailed",
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized",
+                },
+              },
+            },
+            "description": "Unauthorized",
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden",
+                },
+              },
+            },
+            "description": "Forbidden",
+          },
+        },
+        "summary": "Ban a key",
+        "tags": [
+          "Admin",
+        ],
+      },
+    },
+    "/admin/stats": {
+      "get": {
+        "description": "Returns aggregate server statistics. Requires the admin role.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": true,
+            "schema": {
+              "type": "string",
+            },
+          },
+          {
+            "in": "header",
+            "name": "x-request-id",
+            "required": false,
+            "schema": {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerStats",
+                },
+              },
+            },
+            "description": "",
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized",
+                },
+              },
+            },
+            "description": "Unauthorized",
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden",
+                },
+              },
+            },
+            "description": "Forbidden",
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests",
+                },
+              },
+            },
+            "description": "TooManyRequests",
+          },
+        },
+        "summary": "Get server statistics",
+        "tags": [
+          "Admin",
+        ],
+      },
+    },
+    "/api/shapes": {
+      "post": {
+        "description": "Accepts a discriminated union and echoes it back.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "shape": {
+                    "$ref": "#/components/schemas/Shape",
+                  },
+                },
+                "required": [
+                  "shape",
+                ],
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shape",
+                },
+              },
+            },
+            "description": "",
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationFailed",
+                },
+              },
+            },
+            "description": "ValidationFailed",
+          },
+        },
+        "summary": "Create a shape",
+        "tags": [
+          "Shapes",
+        ],
+      },
+    },
+    "/api/users": {
+      "get": {
+        "description": "Returns a paginated list of users.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+            },
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+            },
+          },
+          {
+            "in": "query",
+            "name": "role",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Role",
+            },
+          },
+          {
+            "in": "query",
+            "name": "active",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+            },
+          },
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfUser",
+                },
+              },
+            },
+            "description": "",
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized",
+                },
+              },
+            },
+            "description": "Unauthorized",
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden",
+                },
+              },
+            },
+            "description": "Forbidden",
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests",
+                },
+              },
+            },
+            "description": "TooManyRequests",
+          },
+        },
+        "summary": "List users",
+        "tags": [
+          "Users",
+        ],
+      },
+      "post": {
+        "description": "Creates a new user and returns the created resource.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "age": {
+                    "maximum": 150,
+                    "minimum": 0,
+                    "type": "integer",
+                  },
+                  "email": {
+                    "example": "jane@example.com",
+                    "format": "email",
+                    "type": "string",
+                  },
+                  "name": {
+                    "example": "Jane Doe",
+                    "maxLength": 100,
+                    "minLength": 1,
+                    "type": "string",
+                  },
+                  "password": {
+                    "minLength": 8,
+                    "type": "string",
+                    "writeOnly": true,
+                  },
+                  "role": {
+                    "$ref": "#/components/schemas/Role",
+                    "default": "user",
+                  },
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "password",
+                  "role",
+                ],
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User",
+                },
+              },
+            },
+            "description": "",
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationFailed",
+                },
+              },
+            },
+            "description": "ValidationFailed",
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict",
+                },
+              },
+            },
+            "description": "Conflict",
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests",
+                },
+              },
+            },
+            "description": "TooManyRequests",
+          },
+        },
+        "summary": "Create a user",
+        "tags": [
+          "Users",
+        ],
+      },
+    },
+    "/api/users/{id}": {
+      "delete": {
+        "description": "Permanently deletes a user. Requires an admin role.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized",
+                },
+              },
+            },
+            "description": "Unauthorized",
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden",
+                },
+              },
+            },
+            "description": "Forbidden",
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound",
+                },
+              },
+            },
+            "description": "NotFound",
+          },
+        },
+        "summary": "Delete a user",
+        "tags": [
+          "Users",
+        ],
+      },
+      "get": {
+        "description": "Fetches a single user by its unique identifier.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User",
+                },
+              },
+            },
+            "description": "",
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized",
+                },
+              },
+            },
+            "description": "Unauthorized",
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound",
+                },
+              },
+            },
+            "description": "NotFound",
+          },
+        },
+        "summary": "Get a user by id",
+        "tags": [
+          "Users",
+        ],
+      },
+      "put": {
+        "deprecated": true,
+        "description": "Updates an existing user. Superseded by PATCH.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+            },
+          },
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "address": {
+                    "$ref": "#/components/schemas/MaybeAddress",
+                  },
+                  "age": {
+                    "maximum": 150,
+                    "minimum": 0,
+                    "type": "integer",
+                  },
+                  "name": {
+                    "maxLength": 100,
+                    "minLength": 1,
+                    "type": "string",
+                  },
+                },
+                "required": [
+                  "address",
+                ],
+                "type": "object",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User",
+                },
+              },
+            },
+            "description": "",
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationFailed",
+                },
+              },
+            },
+            "description": "ValidationFailed",
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized",
+                },
+              },
+            },
+            "description": "Unauthorized",
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound",
+                },
+              },
+            },
+            "description": "NotFound",
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict",
+                },
+              },
+            },
+            "description": "Conflict",
+          },
+        },
+        "summary": "Update a user",
+        "tags": [
+          "Users",
+        ],
+      },
+    },
+    "/api/users/{id}/sessions": {
+      "get": {
+        "description": "Returns all active sessions belonging to a user.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Session",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "",
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized",
+                },
+              },
+            },
+            "description": "Unauthorized",
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound",
+                },
+              },
+            },
+            "description": "NotFound",
+          },
+        },
+        "summary": "List sessions for a user",
+        "tags": [
+          "Sessions",
+        ],
+      },
+    },
+    "/api/users/{id}/sessions/{sessionId}": {
+      "delete": {
+        "description": "Revokes a single session of a user.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+            },
+          },
+          {
+            "in": "path",
+            "name": "sessionId",
+            "required": true,
+            "schema": {
+              "type": "string",
+            },
+          },
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized",
+                },
+              },
+            },
+            "description": "Unauthorized",
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound",
+                },
+              },
+            },
+            "description": "NotFound",
+          },
+        },
+        "summary": "Revoke a session",
+        "tags": [
+          "Sessions",
+        ],
+      },
+    },
+  },
+}
+`;

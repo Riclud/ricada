@@ -1,0 +1,21 @@
+{
+  "name": "@ricada/emitter-openapi",
+  "version": "0.0.0",
+  "description": "Ricada OpenAPI 3.1 emitter",
+  "type": "module",
+  "module": "./src/index.ts",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@ricada/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

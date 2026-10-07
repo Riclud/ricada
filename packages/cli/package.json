@@ -1,0 +1,25 @@
+{
+  "name": "@ricada/cli",
+  "version": "0.0.0",
+  "description": "Ricada CLI: check, gen",
+  "type": "module",
+  "module": "./src/index.ts",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "bin": {
+    "ricada": "./src/bin.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@ricada/core": "workspace:*",
+    "@ricada/emitter-openapi": "workspace:*"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

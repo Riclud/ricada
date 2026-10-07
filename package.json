@@ -6,11 +6,15 @@
   "scripts": {
     "dev": "bun run examples/run.ts",
     "start": "bun run examples/run.ts",
+    "check": "bun run packages/cli/src/bin.ts check examples/basic.ricada",
+    "gen": "bun run packages/cli/src/bin.ts gen examples/basic.ricada",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ricada/core": "workspace:*"
+    "@ricada/cli": "workspace:*",
+    "@ricada/core": "workspace:*",
+    "@ricada/emitter-openapi": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "latest",

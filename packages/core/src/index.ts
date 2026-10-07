@@ -6,3 +6,4 @@ export { Cursor } from "./cursor.ts";
 export * from "./tokens.ts";
 export * from "./ast.ts";
 export * from "./ir.ts";
+export * from "./emitter.ts";
