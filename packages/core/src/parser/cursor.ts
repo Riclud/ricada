@@ -1,4 +1,4 @@
-import type { Location } from './types.ts'
+import type { Location } from "./types.ts"
 
 export class Cursor {
   pos = 0
@@ -8,7 +8,7 @@ export class Cursor {
   constructor(public source: string) {}
 
   get ch(): string {
-    return this.source[this.pos] ?? ''
+    return this.source[this.pos] ?? ""
   }
 
   get isEOF(): boolean {
@@ -27,7 +27,7 @@ export class Cursor {
   advance(n = 1): void {
     for (let i = 0; i < n; i++) {
       if (this.pos >= this.source.length) break
-      if (this.source[this.pos] === '\n') {
+      if (this.source[this.pos] === "\n") {
         this.line++
         this.col = 1
       } else {

@@ -1,9 +1,9 @@
-import { Cursor } from "./cursor.ts";
-import { LexError } from "./errors.ts";
-import { PUNCTUATION, WORD_PART, WORD_START } from "./tokens.ts";
-import type { Token, TokenType } from "./tokens.ts";
+import { Cursor } from "./cursor.ts"
+import { LexError } from "./errors.ts"
+import { PUNCTUATION, WORD_PART, WORD_START } from "./tokens.ts"
+import type { Token, TokenType } from "./tokens.ts"
 
-const isDigit = (ch: string): boolean => ch >= "0" && ch <= "9";
+const isDigit = (ch: string): boolean => ch >= "0" && ch <= "9"
 
 const isPathStop = (ch: string): boolean =>
   ch === "" ||
@@ -17,131 +17,131 @@ const isPathStop = (ch: string): boolean =>
   ch === ")" ||
   ch === "[" ||
   ch === "]" ||
-  ch === ",";
+  ch === ","
 
 export function lex(source: string): Token[] {
-  const tokens: Token[] = [];
-  const c = new Cursor(source);
+  const tokens: Token[] = []
+  const c = new Cursor(source)
 
   const add = (type: TokenType, value: string | null, loc = c.loc()): void => {
-    tokens.push({ type, value, loc });
-  };
+    tokens.push({ type, value, loc })
+  }
 
   while (!c.isEOF) {
-    const ch = c.ch;
+    const ch = c.ch
 
     // newlines
     if (ch === "\n" || ch === "\r") {
-      if (ch === "\r" && c.peek() === "\n") c.advance(2);
-      else c.advance();
-      add("NEWLINE", null);
-      continue;
+      if (ch === "\r" && c.peek() === "\n") c.advance(2)
+      else c.advance()
+      add("NEWLINE", null)
+      continue
     }
 
     // whitespace (indentation is cosmetic)
     if (ch === " " || ch === "\t") {
-      c.advance();
-      continue;
+      c.advance()
+      continue
     }
 
     // comments: "// ..." and "# ..."
     if (ch === "#" || (ch === "/" && c.peek() === "/")) {
-      c.skipWhile((x) => x !== "\n" && x !== "\r");
-      continue;
+      c.skipWhile((x) => x !== "\n" && x !== "\r")
+      continue
     }
 
     // strings
     if (ch === '"' || ch === "'") {
-      const start = c.loc();
-      const quote = ch;
-      c.advance();
-      let value = "";
+      const start = c.loc()
+      const quote = ch
+      c.advance()
+      let value = ""
       while (!c.isEOF && c.ch !== quote) {
         if (c.ch === "\\") {
-          c.advance();
-          const e: string = c.ch;
-          if (e === "n") value += "\n";
-          else if (e === "t") value += "\t";
-          else if (e === "r") value += "\r";
-          else if (e === "\\") value += "\\";
-          else if (e === quote) value += quote;
+          c.advance()
+          const e: string = c.ch
+          if (e === "n") value += "\n"
+          else if (e === "t") value += "\t"
+          else if (e === "r") value += "\r"
+          else if (e === "\\") value += "\\"
+          else if (e === quote) value += quote
           else if (e === "") {
-            value += "\\";
-            break;
-          } else value += "\\" + e;
-          c.advance();
+            value += "\\"
+            break
+          } else value += "\\" + e
+          c.advance()
         } else {
-          value += c.ch;
-          c.advance();
+          value += c.ch
+          c.advance()
         }
       }
       if (c.isEOF) {
-        throw new LexError("unterminated string", start, 1, `add a closing ${quote}`);
+        throw new LexError("unterminated string", start, 1, `add a closing ${quote}`)
       }
-      c.advance(); // closing quote
-      add("STRING", value, start);
-      continue;
+      c.advance() // closing quote
+      add("STRING", value, start)
+      continue
     }
 
     // decorators: @name, @ns.name
     if (ch === "@") {
-      const start = c.loc();
-      c.advance();
-      let name = c.eatWhile((x) => WORD_PART.test(x));
+      const start = c.loc()
+      c.advance()
+      let name = c.eatWhile((x) => WORD_PART.test(x))
       if (name === "") {
-        throw new LexError("empty annotation name", start, 1, "e.g. @min, @cache");
+        throw new LexError("empty annotation name", start, 1, "e.g. @min, @cache")
       }
       while (c.is(".")) {
-        c.advance();
-        const seg = c.eatWhile((x) => WORD_PART.test(x));
+        c.advance()
+        const seg = c.eatWhile((x) => WORD_PART.test(x))
         if (seg === "") {
-          throw new LexError("empty annotation namespace", start, 1, "e.g. @http.status");
+          throw new LexError("empty annotation namespace", start, 1, "e.g. @http.status")
         }
-        name += "." + seg;
+        name += "." + seg
       }
-      add("DECORATOR", name, start);
-      continue;
+      add("DECORATOR", name, start)
+      continue
     }
 
     // paths: /users/:id
     if (ch === "/") {
-      const start = c.loc();
-      const path = c.eatWhile((x) => !isPathStop(x));
-      add("PATH", path, start);
-      continue;
+      const start = c.loc()
+      const path = c.eatWhile((x) => !isPathStop(x))
+      add("PATH", path, start)
+      continue
     }
 
     // words / identifiers
     if (WORD_START.test(ch)) {
-      const start = c.loc();
-      const word = c.eatWhile((x) => WORD_PART.test(x));
-      add("WORD", word, start);
-      continue;
+      const start = c.loc()
+      const word = c.eatWhile((x) => WORD_PART.test(x))
+      add("WORD", word, start)
+      continue
     }
 
     // numbers: 120, 4.5
     if (isDigit(ch)) {
-      const start = c.loc();
-      let num = c.eatWhile(isDigit);
+      const start = c.loc()
+      let num = c.eatWhile(isDigit)
       if (c.is(".") && isDigit(c.peek())) {
-        c.advance();
-        num += "." + c.eatWhile(isDigit);
+        c.advance()
+        num += "." + c.eatWhile(isDigit)
       }
-      add("NUMBER", num, start);
-      continue;
+      add("NUMBER", num, start)
+      continue
     }
 
     // punctuation
-    const punct = PUNCTUATION[ch];
+    const punct = PUNCTUATION[ch]
     if (punct) {
-      add(punct, null);
-      c.advance();
-      continue;
+      add(punct, null)
+      c.advance()
+      continue
     }
 
-    throw new LexError(`unexpected character \`${ch}\``, c.loc(), 1);
+    throw new LexError(`unexpected character \`${ch}\``, c.loc(), 1)
   }
 
-  add("EOF", null);
-  return tokens;
+  add("EOF", null)
+  return tokens
 }

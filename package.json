@@ -2,7 +2,9 @@
   "name": "ricada",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "bun run examples/run.ts",
     "start": "bun run examples/run.ts",

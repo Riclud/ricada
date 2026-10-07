@@ -1,6 +1,6 @@
-import { ParseError } from './errors.ts'
-import { HTTP_METHODS, PARAM_KINDS } from './types.ts'
-import type { Token, DecoratorNode, ObjectFieldNode, ParamNode, RouteNode, TypeNode, AstNode } from './types.ts'
+import { ParseError } from "./errors.ts"
+import { HTTP_METHODS, PARAM_KINDS } from "./types.ts"
+import type { Token, DecoratorNode, ObjectFieldNode, ParamNode, RouteNode, TypeNode, AstNode } from "./types.ts"
 
 export function parse(tokens: Token[], sourceLines: string[]): AstNode {
   let pos = 0
@@ -9,27 +9,22 @@ export function parse(tokens: Token[], sourceLines: string[]): AstNode {
     return tokens[pos]!
   }
 
-  function consume(expected?: Token['type']): Token {
+  function consume(expected?: Token["type"]): Token {
     const t = peek()
     if (expected !== undefined && t.type !== expected) {
-      throw new ParseError(
-        'error',
-        `ожидался ${expected}, получен ${t.type}`,
-        t.loc.line,
-        t.loc.col,
-      )
+      throw new ParseError("error", `ожидался ${expected}, получен ${t.type}`, t.loc.line, t.loc.col)
     }
     pos++
     return t
   }
 
-  function skip(type: Token['type']): void {
+  function skip(type: Token["type"]): void {
     while (peek().type === type) consume()
   }
 
   function parseRouteDecorators(): DecoratorNode[] {
     const decorators: DecoratorNode[] = []
-    while (peek().type === 'DECORATOR') {
+    while (peek().type === "DECORATOR") {
       const d = consume().value as { name: string; arg: string | null }
       decorators.push(d)
     }
@@ -38,25 +33,25 @@ export function parse(tokens: Token[], sourceLines: string[]): AstNode {
 
   function parseRouteDecl(): RouteNode {
     const decorators = parseRouteDecorators()
-    skip('NEWLINE')
-    skip('INDENT') // отступ перед методом роута (после декоратора)
+    skip("NEWLINE")
+    skip("INDENT") // отступ перед методом роута (после декоратора)
 
     const token = peek()
-    const raw = consume('WORD').value as string
+    const raw = consume("WORD").value as string
     const method = raw.toUpperCase()
 
     if (!HTTP_METHODS.has(method as typeof HTTP_METHODS extends Set<infer T> ? T : never)) {
       throw new ParseError(
-        'error',
+        "error",
         `неизвестный HTTP-метод \`${raw}\``,
         token.loc.line,
         token.loc.col,
         raw.length,
-        `допустимые методы: ${[...HTTP_METHODS].join(', ')}`,
+        `допустимые методы: ${[...HTTP_METHODS].join(", ")}`,
       )
     }
 
-    const path = consume('PATH').value as string
+    const path = consume("PATH").value as string
 
     const route: RouteNode = { method, path, decorators, params: [] }
     return route
@@ -65,31 +60,31 @@ export function parse(tokens: Token[], sourceLines: string[]): AstNode {
   // парсит поля внутри { name: type, age: type }
   function parseObjectFields(): ObjectFieldNode[] {
     const fields: ObjectFieldNode[] = []
-    skip('NEWLINE')
+    skip("NEWLINE")
 
-    while (peek().type === 'INDENT') {
+    while (peek().type === "INDENT") {
       const next = pos + 1 < tokens.length ? tokens[pos + 1] : null
-      if (next?.type === 'RBRACE') break
+      if (next?.type === "RBRACE") break
       consume()
 
-      const fName = consume('WORD').value as string
-      const fOptional = peek().type === 'OPTIONAL'
+      const fName = consume("WORD").value as string
+      const fOptional = peek().type === "OPTIONAL"
       if (fOptional) consume()
-      consume('COLON')
-      skip('INDENT')
+      consume("COLON")
+      skip("INDENT")
 
-      const fType = consume('WORD').value as string
-      const fNullable = peek().type === 'OPTIONAL'
+      const fType = consume("WORD").value as string
+      const fNullable = peek().type === "OPTIONAL"
       if (fNullable) consume()
 
       const fDecorators: DecoratorNode[] = []
-      while (peek().type === 'DECORATOR') {
+      while (peek().type === "DECORATOR") {
         const d = consume().value as { name: string; arg: string | null }
         fDecorators.push(d)
       }
 
       fields.push({ name: fName, type: fType, optional: fOptional, nullable: fNullable, decorators: fDecorators })
-      skip('NEWLINE')
+      skip("NEWLINE")
     }
 
     return fields
@@ -98,75 +93,75 @@ export function parse(tokens: Token[], sourceLines: string[]): AstNode {
   function parseParam(): ParamNode {
     // декораторы перед параметром (например @description)
     const paramDecorators: DecoratorNode[] = []
-    while (peek().type === 'DECORATOR') {
+    while (peek().type === "DECORATOR") {
       const d = consume().value as { name: string; arg: string | null }
       paramDecorators.push(d)
-      skip('NEWLINE')
-      skip('INDENT')
+      skip("NEWLINE")
+      skip("INDENT")
     }
 
     const inToken = peek()
-    const rawKind = consume('WORD').value as string
+    const rawKind = consume("WORD").value as string
 
     if (!PARAM_KINDS.has(rawKind)) {
       throw new ParseError(
-        'error',
+        "error",
         `неизвестный тип параметра \`${rawKind}\``,
         inToken.loc.line,
         inToken.loc.col,
         rawKind.length,
-        'используйте body, param, query, header (или b, p, q, h)',
+        "используйте body, param, query, header (или b, p, q, h)",
       )
     }
 
     const nameToken = peek()
-    const name = consume('WORD').value as string
+    const name = consume("WORD").value as string
 
-    const optional = peek().type === 'OPTIONAL'
+    const optional = peek().type === "OPTIONAL"
     if (optional) consume()
 
-    if (peek().type !== 'COLON') {
+    if (peek().type !== "COLON") {
       throw new ParseError(
-        'error',
-        'поле без типа',
+        "error",
+        "поле без типа",
         nameToken.loc.line,
         nameToken.loc.col,
         name.length,
         `попробуйте \`${rawKind} ${name} : string\``,
       )
     }
-    consume('COLON')
+    consume("COLON")
 
-    skip('INDENT')
+    skip("INDENT")
 
     let type: string
     let fields: ObjectFieldNode[] | undefined
 
-    if (peek().type === 'LBRACE') {
+    if (peek().type === "LBRACE") {
       consume() // skip '{'
-      type = 'object'
+      type = "object"
       fields = parseObjectFields()
 
-      skip('INDENT')
-      if (peek().type === 'RBRACE') consume()
+      skip("INDENT")
+      if (peek().type === "RBRACE") consume()
     } else {
       // простой тип: string, number, email
-      if (peek().type !== 'WORD') {
+      if (peek().type !== "WORD") {
         throw new ParseError(
-          'error',
-          'ожидался тип поля после `:`',
+          "error",
+          "ожидался тип поля после `:`",
           peek().loc.line,
           peek().loc.col,
           1,
-          'например: string, number, boolean',
+          "например: string, number, boolean",
         )
       }
-      type = consume('WORD').value as string
-      const nullable = peek().type === 'OPTIONAL'
+      type = consume("WORD").value as string
+      const nullable = peek().type === "OPTIONAL"
       if (nullable) consume()
 
       const decorators: DecoratorNode[] = [...paramDecorators]
-      while (peek().type === 'DECORATOR') {
+      while (peek().type === "DECORATOR") {
         const d = consume().value as { name: string; arg: string | null }
         decorators.push(d)
       }
@@ -176,7 +171,7 @@ export function parse(tokens: Token[], sourceLines: string[]): AstNode {
 
     // декораторы после объекта
     const decorators: DecoratorNode[] = [...paramDecorators]
-    while (peek().type === 'DECORATOR') {
+    while (peek().type === "DECORATOR") {
       const d = consume().value as { name: string; arg: string | null }
       decorators.push(d)
     }
@@ -187,44 +182,44 @@ export function parse(tokens: Token[], sourceLines: string[]): AstNode {
   // === MAIN ===
   const types: TypeNode[] = []
   const routes: RouteNode[] = []
-  let groupPrefix = ''
+  let groupPrefix = ""
   let baseIndent = 0
 
-  while (peek().type !== 'EOF') {
-    skip('NEWLINE')
-    if (peek().type === 'EOF') break
+  while (peek().type !== "EOF") {
+    skip("NEWLINE")
+    if (peek().type === "EOF") break
 
-    if (peek().type === 'PATH') {
+    if (peek().type === "PATH") {
       groupPrefix = consume().value as string
       baseIndent = 0
       continue
     }
 
-    if (peek().type === 'INDENT') {
+    if (peek().type === "INDENT") {
       baseIndent = consume().value as number
       continue
     }
 
     // type definition: type User { name: string, age: number }
-    if (peek().type === 'WORD' && peek().value === 'type') {
+    if (peek().type === "WORD" && peek().value === "type") {
       consume()
-      const name = consume('WORD').value as string
-      consume('LBRACE')
+      const name = consume("WORD").value as string
+      consume("LBRACE")
       const fields = parseObjectFields()
-      skip('INDENT')
-      if (peek().type === 'RBRACE') consume()
+      skip("INDENT")
+      if (peek().type === "RBRACE") consume()
       types.push({ name, fields })
       continue
     }
 
     const route = parseRouteDecl()
     route.path = groupPrefix + route.path
-    skip('NEWLINE')
+    skip("NEWLINE")
 
-    while (peek().type === 'INDENT' && (peek().value as number) > baseIndent) {
+    while (peek().type === "INDENT" && (peek().value as number) > baseIndent) {
       consume()
       route.params.push(parseParam())
-      skip('NEWLINE')
+      skip("NEWLINE")
     }
 
     routes.push(route)

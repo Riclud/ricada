@@ -1,20 +1,20 @@
 export type TokenType =
-  | 'NEWLINE'
-  | 'INDENT'
-  | 'WORD'
-  | 'NUMBER'
-  | 'PATH'
-  | 'COLON'
-  | 'OPTIONAL'
-  | 'DECORATOR'
-  | 'LPAREN'
-  | 'RPAREN'
-  | 'COMMA'
-  | 'LBRACE'
-  | 'RBRACE'
-  | 'STRING'
-  | 'ARROW'
-  | 'EOF'
+  | "NEWLINE"
+  | "INDENT"
+  | "WORD"
+  | "NUMBER"
+  | "PATH"
+  | "COLON"
+  | "OPTIONAL"
+  | "DECORATOR"
+  | "LPAREN"
+  | "RPAREN"
+  | "COMMA"
+  | "LBRACE"
+  | "RBRACE"
+  | "STRING"
+  | "ARROW"
+  | "EOF"
 
 export interface Location {
   line: number
@@ -27,12 +27,9 @@ export interface Token {
   loc: Location
 }
 
-export const HTTP_METHODS = new Set([
-  'GET', 'POST', 'PUT', 'DELETE', 'PATCH',
-  'OPTIONS', 'HEAD', 'TRACE', 'CONNECT',
-])
+export const HTTP_METHODS = new Set(["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD", "TRACE", "CONNECT"])
 
-export const PARAM_KINDS = new Set(['body', 'param', 'query', 'header', 'b', 'p', 'q', 'h'])
+export const PARAM_KINDS = new Set(["body", "param", "query", "header", "b", "p", "q", "h"])
 
 export interface DecoratorNode {
   name: string

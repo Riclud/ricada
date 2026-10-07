@@ -17,18 +17,18 @@ export type TokenType =
   | "EQUALS"
   | "PIPE"
   | "NEWLINE"
-  | "EOF";
+  | "EOF"
 
 export interface Location {
-  line: number;
-  col: number;
-  offset: number;
+  line: number
+  col: number
+  offset: number
 }
 
 export interface Token {
-  type: TokenType;
-  value: string | null;
-  loc: Location;
+  type: TokenType
+  value: string | null
+  loc: Location
 }
 
 export const PUNCTUATION: Record<string, TokenType> = {
@@ -44,7 +44,7 @@ export const PUNCTUATION: Record<string, TokenType> = {
   "?": "QUESTION",
   "=": "EQUALS",
   "|": "PIPE",
-};
+}
 
-export const WORD_START = /[\p{L}_]/u;
-export const WORD_PART = /[\p{L}\p{N}_-]/u;
+export const WORD_START = /[\p{L}_]/u
+export const WORD_PART = /[\p{L}\p{N}_-]/u
