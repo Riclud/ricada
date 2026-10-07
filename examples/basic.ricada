@@ -1,20 +1,378 @@
-type User {
-    name: string @min(10)
-    age: number @max(99)
+// ============================================================
+// Ricada API contract — reference example (v1)
+// ------------------------------------------------------------
+// Ricada is a single human-readable contract that is the source
+// of truth for:
+//   - request / response validation
+//   - backend handler interfaces (implements-like stubs)
+//   - frontend clients
+//   - OpenAPI export and generated documentation
+//   - gateway policy (auth, rate limits, CORS, security)
+//
+// Syntax rules:
+//   - { } define structure; indentation is cosmetic
+//   - fields are separated by newlines or commas
+//   - comments use // (this style) or #
+//   - annotations look like @name(pos, named: value)
+//   - "?" means optional, "[]" means array, "= x" is a default
+//   - "error" declares a first-class error type
+//   - "A | B" is a union; "null" and literals like "circle" are allowed
+//   - annotations come AFTER the declaration they describe (Style A)
+//   - newlines inside annotation ( ) are allowed for long arguments
+// ============================================================
+
+// Modules can be split across files. "common.ricada" would hold
+// shared error types, enums and base models.
+import "./common.ricada"
+
+// ------------------------------------------------------------
+// Configuration: codegen targets and gateway policy.
+// Every target emits from the same IR, so validation, clients,
+// gateway behaviour and docs never drift apart.
+// ------------------------------------------------------------
+
+config {
+  targets: [ts-client, ts-elysia, ts-nestjs, openapi, docs]
+  out: "./generated"
+  wire: json
+
+  // Auth schemes (verified natively by Ricada, then injected).
+  auth {
+    bearer {
+      type: jwt
+      issuer: env("JWT_ISSUER")
+      audience: "api"
+      secret: env("JWT_SECRET")
+      algorithm: HS256
+    }
+    apiKey {
+      type: apiKey
+      in: header
+      name: "X-API-Key"
+      key: env("API_KEY")
+    }
+  }
+
+  // CORS (rich, per config; can be overridden per group/route).
+  cors {
+    origins: [env("APP_ORIGIN")]
+    methods: [GET, POST, PUT, PATCH, DELETE]
+    headers: ["Authorization", "Content-Type", "Idempotency-Key"]
+    credentials: true
+    maxAge: "1h"
+  }
+
+  // Baseline security headers.
+  security {
+    headers {
+      hsts: true
+      xContentTypeOptions: nosniff
+      xFrameOptions: DENY
+      referrerPolicy: "no-referrer"
+      contentSecurityPolicy: "default-src 'self'"
+    }
+  }
+
+  // Rate limiting: built-in, token bucket.
+  // store: memory now, redis later (distributed, cluster-wide).
+  rateLimit {
+    algorithm: tokenBucket
+    store: memory
+    default { limit: 1000, window: "1m", key: ip, burst: 50 }
+  }
+
+  // Control plane: backend may mutate gateway state
+  // (reset limits, deny keys, invalidate cache, emit metrics).
+  control {
+    secret: env("RICADA_CONTROL_SECRET")
+    allow: [rateLimit, deny, cache, metrics, breaker]
+  }
 }
 
-/api
-    @description('Такая-то точка')
-    POST /users/:id
-        @description('Такой-то роут')
-        b name123: string @min(1) @max(100)
+// ------------------------------------------------------------
+// Errors — first-class, typed and reusable across routes.
+// This is the part most API tools only describe "verbally".
+// ------------------------------------------------------------
 
-        @description("Такое-то поле")
-        b age: number @min(100)
+type FieldError {
+  field: string
+  reason: string
+}
 
-        p id: string @toUpperCase
-        q page: number?
-        b objExample: User
+error BadRequest {
+  message: string
+  code: string = "BAD_REQUEST"
+}
 
-    GET /test/:id
-        p id?: number
+error Unauthorized {
+  message: string
+  code: string = "UNAUTHORIZED"
+}
+
+error Forbidden {
+  message: string
+  code: string = "FORBIDDEN"
+}
+
+error NotFound {
+  message: string
+  code: string = "NOT_FOUND"
+}
+
+error Conflict {
+  message: string
+  code: string = "CONFLICT"
+}
+
+error TooManyRequests {
+  message: string
+  code: string = "TOO_MANY_REQUESTS"
+  retryAfter: int
+}
+
+error ValidationFailed {
+  message: string
+  fields: FieldError[]
+}
+
+// ------------------------------------------------------------
+// Enums
+// ------------------------------------------------------------
+
+enum Role { admin, user, guest }
+
+// ------------------------------------------------------------
+// Types — the shared vocabulary of the API.
+// ------------------------------------------------------------
+
+type Address {
+  street: string @min(1) @max(200)
+  city: string @min(1) @max(100)
+  zip: string @regex("^[0-9]{5}$") @example("90210")
+  country: string = "US"
+}
+
+type User {
+  id: string
+    @uuid
+    @example(
+      "550e8400-e29b-41d4-a716-446655440000"
+    )
+    @description("Unique identifier")
+  name: string @min(1) @max(100) @example("Jane Doe")
+  email: string @email @example("jane@example.com")
+  age: int? @min(0) @max(150) @example(30)
+  score: float? @min(0) @max(5) @example(4.5)
+  active: bool = true
+  role: Role = user
+  tags: string[]
+  address: Address?
+  createdAt: datetime
+}
+
+type PageOfUser {
+  items: User[]
+  total: int @min(0)
+  page: int @min(1)
+  size: int @min(1)
+}
+
+type ServerStats {
+  users: int
+  activeUsers: int
+  requests: int
+}
+
+type Session {
+  id: string @uuid
+  userAgent: string
+  ip: string
+  createdAt: datetime
+  expiresAt: datetime
+}
+
+// ------------------------------------------------------------
+// Unions and literal types
+//   - "A | B" unions primitives, objects or null
+//   - a discriminated union is detected by a shared literal field
+// ------------------------------------------------------------
+
+type Id = string | int
+type MaybeAddress = Address | null
+
+type Circle {
+  kind: "circle" @example("circle")
+  radius: float @min(0)
+}
+
+type Square {
+  kind: "square" @example("square")
+  side: float @min(0)
+}
+
+type Shape = Circle | Square
+
+// ------------------------------------------------------------
+// Routes
+//   Blocks group inputs: body / params / query / headers.
+//   returns  -> response type (optionally per status code)
+//   errors   -> status code mapped to a declared error type
+//   handler  -> name of the backend function to implement
+//   All route annotations live INSIDE the route block (Style A).
+// ------------------------------------------------------------
+
+/api {
+  // ---------- Users ----------
+
+  GET /users {
+    @tag("Users")
+    @summary("List users")
+    @description("Returns a paginated list of users.")
+    @auth(bearer, scopes: ["read:users"])
+    @rateLimit(limit: 120, window: "1m", key: jwt.sub, burst: 30)
+    query {
+      page: int? @min(1)
+      size: int? @min(1) @max(100)
+      role: Role?
+      active: bool?
+    }
+    returns 200: PageOfUser
+    errors { 401: Unauthorized, 403: Forbidden, 429: TooManyRequests }
+    handler listUsers
+    @cache(ttl: 30, key: "users:{page}:{size}:{role}:{active}")
+  }
+
+  POST /users {
+    @tag("Users")
+    @summary("Create a user")
+    @description("Creates a new user and returns the created resource.")
+    @auth(public: true)
+    @rateLimit(limit: 20, window: "1m", key: ip)
+    body {
+      name: string @min(1) @max(100) @example("Jane Doe")
+      email: string @email @example("jane@example.com")
+      password: string @min(8) @sensitive
+      age: int? @min(0) @max(150)
+      role: Role = user
+    }
+    returns 201: User
+    errors { 400: ValidationFailed, 409: Conflict, 429: TooManyRequests }
+    handler createUser
+  }
+
+  GET /users/:id {
+    @tag("Users")
+    @summary("Get a user by id")
+    @description("Fetches a single user by its unique identifier.")
+    @auth(bearer, scopes: ["read:users"])
+    params { id: string @uuid }
+    returns 200: User
+    errors { 401: Unauthorized, 404: NotFound }
+    handler getUser
+  }
+
+  PUT /users/:id {
+    @tag("Users")
+    @summary("Update a user")
+    @description("Updates an existing user. Superseded by PATCH.")
+    @auth(bearer, scopes: ["write:users"])
+    params { id: string @uuid }
+    body {
+      name: string? @min(1) @max(100)
+      age: int? @min(0) @max(150)
+      address: MaybeAddress
+    }
+    returns 200: User
+    errors { 400: ValidationFailed, 401: Unauthorized, 404: NotFound, 409: Conflict }
+    handler updateUser
+    @deprecated(reason: "Use PATCH /users/:id instead")
+  }
+
+  DELETE /users/:id {
+    @tag("Users")
+    @summary("Delete a user")
+    @description("Permanently deletes a user. Requires an admin role.")
+    @auth(bearer, roles: ["admin"])
+    params { id: string @uuid }
+    returns 204
+    errors { 401: Unauthorized, 403: Forbidden, 404: NotFound }
+    handler deleteUser
+  }
+
+  // ---------- Nested resource: user sessions ----------
+
+  GET /users/:id/sessions {
+    @tag("Sessions")
+    @summary("List sessions for a user")
+    @description("Returns all active sessions belonging to a user.")
+    @auth(bearer, scopes: ["read:users"])
+    params { id: string @uuid }
+    returns 200: Session[]
+    errors { 401: Unauthorized, 404: NotFound }
+    handler listUserSessions
+  }
+
+  DELETE /users/:id/sessions/:sessionId {
+    @tag("Sessions")
+    @summary("Revoke a session")
+    @description("Revokes a single session of a user.")
+    @auth(bearer, scopes: ["write:users"])
+    params {
+      id: string @uuid
+      sessionId: string @uuid
+    }
+    returns 204
+    errors { 401: Unauthorized, 404: NotFound }
+    handler revokeUserSession
+  }
+
+  // ---------- Unions in practice ----------
+
+  POST /shapes {
+    @tag("Shapes")
+    @summary("Create a shape")
+    @description("Accepts a discriminated union and echoes it back.")
+    @auth(public: true)
+    body {
+      shape: Shape
+    }
+    returns 201: Shape
+    errors { 400: ValidationFailed }
+    handler createShape
+  }
+}
+
+// ------------------------------------------------------------
+// Admin area — headers, RBAC and a stricter rate limit.
+// ------------------------------------------------------------
+
+/admin {
+  GET /stats {
+    @tag("Admin")
+    @summary("Get server statistics")
+    @description("Returns aggregate server statistics. Requires the admin role.")
+    @auth(bearer, roles: ["admin"])
+    @rateLimit(limit: 30, window: "1m", key: jwt.sub, burst: 5)
+    headers {
+      authorization: string
+      x-request-id: string?
+    }
+    returns 200: ServerStats
+    errors { 401: Unauthorized, 403: Forbidden, 429: TooManyRequests }
+    handler getStats
+  }
+
+  POST /deny {
+    @tag("Admin")
+    @summary("Ban a key")
+    @description("Adds a key (JWT subject, API key or session) to the deny list. Delegates to the control plane.")
+    @auth(bearer, roles: ["admin"])
+    body {
+      key: string
+      ttl: string? @example("24h")
+    }
+    returns 204
+    errors { 400: ValidationFailed, 401: Unauthorized, 403: Forbidden }
+    handler denyKey
+  }
+}
