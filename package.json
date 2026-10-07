@@ -18,7 +18,9 @@
   "dependencies": {
     "@ricada/cli": "workspace:*",
     "@ricada/core": "workspace:*",
-    "@ricada/emitter-openapi": "workspace:*"
+    "@ricada/emitter-openapi": "workspace:*",
+    "@ricada/emitter-ts-common": "workspace:*",
+    "@ricada/emitter-ts-server": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "latest",

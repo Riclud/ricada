@@ -105,12 +105,13 @@ export function fieldSchema(field: IrField): Json {
   return schema
 }
 
-function objectSchema(fields: IrField[]): Json {
+function objectSchema(fields: IrField[], requestMode = false): Json {
   const properties: Json = {}
   const required: string[] = []
   for (const f of fields) {
     properties[f.name] = fieldSchema(f)
-    if (!f.optional) required.push(f.name)
+    const optional = f.optional || (requestMode && f.default !== null)
+    if (!optional) required.push(f.name)
   }
   const schema: Json = { type: "object", properties }
   if (required.length > 0) schema.required = required
@@ -148,7 +149,7 @@ function parameters(route: IrRoute): Json[] {
       out.push({
         name: field.name,
         in: location,
-        required: block.in === "params" ? true : !field.optional,
+        required: block.in === "params" ? true : !field.optional && field.default === null,
         schema,
       })
     }
@@ -161,7 +162,7 @@ function requestBody(route: IrRoute): Json | null {
   if (!body) return null
   return {
     required: true,
-    content: { "application/json": { schema: objectSchema(body.fields) } },
+    content: { "application/json": { schema: objectSchema(body.fields, true) } },
   }
 }
 

@@ -168,6 +168,14 @@ exports[`lexer v2 reference example token snapshot 1`] = `
   },
   {
     "type": "WORD",
+    "value": "ts-server",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
     "value": "ts-client",
   },
   {

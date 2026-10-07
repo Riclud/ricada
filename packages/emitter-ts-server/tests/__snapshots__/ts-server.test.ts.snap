@@ -1,0 +1,209 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`ts-server emitter contract snapshot 1`] = `
+"import type * as T from "./types";
+
+export interface ListUsersInput {
+  query: {
+    page?: number
+    size?: number
+    role?: T.Role
+    active?: boolean
+  }
+}
+
+export interface CreateUserInput {
+  body: {
+    name: string
+    email: string
+    password: string
+    age?: number
+    role?: T.Role
+  }
+}
+
+export interface GetUserInput {
+  params: {
+    id: string
+  }
+}
+
+export interface UpdateUserInput {
+  params: {
+    id: string
+  }
+  body: {
+    name?: string
+    age?: number
+    address: T.MaybeAddress
+  }
+}
+
+export interface DeleteUserInput {
+  params: {
+    id: string
+  }
+}
+
+export interface ListUserSessionsInput {
+  params: {
+    id: string
+  }
+}
+
+export interface RevokeUserSessionInput {
+  params: {
+    id: string
+    sessionId: string
+  }
+}
+
+export interface CreateShapeInput {
+  body: {
+    shape: T.Shape
+  }
+}
+
+export interface GetStatsInput {
+  headers: {
+    authorization: string
+    "x-request-id"?: string
+  }
+}
+
+export interface DenyKeyInput {
+  body: {
+    key: string
+    ttl?: string
+  }
+}
+
+export interface Handlers {
+  listUsers(input: ListUsersInput): Promise<T.PageOfUser> | T.PageOfUser;
+  createUser(input: CreateUserInput): Promise<T.User> | T.User;
+  getUser(input: GetUserInput): Promise<T.User> | T.User;
+  updateUser(input: UpdateUserInput): Promise<T.User> | T.User;
+  deleteUser(input: DeleteUserInput): Promise<void> | void;
+  listUserSessions(input: ListUserSessionsInput): Promise<T.Session[]> | T.Session[];
+  revokeUserSession(input: RevokeUserSessionInput): Promise<void> | void;
+  createShape(input: CreateShapeInput): Promise<T.Shape> | T.Shape;
+  getStats(input: GetStatsInput): Promise<T.ServerStats> | T.ServerStats;
+  denyKey(input: DenyKeyInput): Promise<void> | void;
+}
+
+export type RouteName = keyof Handlers;
+
+export function defineHandlers<H extends Handlers>(handlers: H): H {
+  return handlers;
+}
+"
+`;
+
+exports[`ts-server emitter types snapshot 1`] = `
+"export interface FieldError {
+  field: string
+  reason: string
+}
+
+export const Role = {
+  admin: "admin",
+  user: "user",
+  guest: "guest",
+} as const;
+export type Role = (typeof Role)[keyof typeof Role];
+
+export interface Address {
+  street: string
+  city: string
+  zip: string
+  country: string
+}
+
+export interface User {
+  /** Unique identifier */
+  id: string
+  name: string
+  email: string
+  age?: number
+  score?: number
+  active: boolean
+  role: Role
+  tags: string[]
+  address?: Address
+  createdAt: string
+}
+
+export interface PageOfUser {
+  items: User[]
+  total: number
+  page: number
+  size: number
+}
+
+export interface ServerStats {
+  users: number
+  activeUsers: number
+  requests: number
+}
+
+export interface Session {
+  id: string
+  userAgent: string
+  ip: string
+  createdAt: string
+  expiresAt: string
+}
+
+export type Id = string | number;
+
+export type MaybeAddress = Address | null;
+
+export interface Circle {
+  kind: "circle"
+  radius: number
+}
+
+export interface Square {
+  kind: "square"
+  side: number
+}
+
+export type Shape = Circle | Square;
+
+export interface BadRequest {
+  message: string
+  code: string
+}
+
+export interface Unauthorized {
+  message: string
+  code: string
+}
+
+export interface Forbidden {
+  message: string
+  code: string
+}
+
+export interface NotFound {
+  message: string
+  code: string
+}
+
+export interface Conflict {
+  message: string
+  code: string
+}
+
+export interface TooManyRequests {
+  message: string
+  code: string
+  retryAfter: number
+}
+
+export interface ValidationFailed {
+  message: string
+  fields: FieldError[]
+}
+"
+`;

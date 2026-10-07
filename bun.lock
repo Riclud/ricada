@@ -8,6 +8,8 @@
         "@ricada/cli": "workspace:*",
         "@ricada/core": "workspace:*",
         "@ricada/emitter-openapi": "workspace:*",
+        "@ricada/emitter-ts-common": "workspace:*",
+        "@ricada/emitter-ts-server": "workspace:*",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -49,6 +51,27 @@
         "typescript": "^5",
       },
     },
+    "packages/emitter-ts-common": {
+      "name": "@ricada/emitter-ts-common",
+      "version": "0.0.0",
+      "dependencies": {
+        "@ricada/core": "workspace:*",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
+    "packages/emitter-ts-server": {
+      "name": "@ricada/emitter-ts-server",
+      "version": "0.0.0",
+      "dependencies": {
+        "@ricada/core": "workspace:*",
+        "@ricada/emitter-ts-common": "workspace:*",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
   },
   "packages": {
     "@ricada/cli": ["@ricada/cli@workspace:packages/cli"],
@@ -56,6 +79,10 @@
     "@ricada/core": ["@ricada/core@workspace:packages/core"],
 
     "@ricada/emitter-openapi": ["@ricada/emitter-openapi@workspace:packages/emitter-openapi"],
+
+    "@ricada/emitter-ts-common": ["@ricada/emitter-ts-common@workspace:packages/emitter-ts-common"],
+
+    "@ricada/emitter-ts-server": ["@ricada/emitter-ts-server@workspace:packages/emitter-ts-server"],
 
     "@types/bun": ["@types/bun@1.3.14", "", { "dependencies": { "bun-types": "1.3.14" } }, "sha512-h1hFqFVcvAvD9j9K7ZW7vd82aSA+rTdznZa+5bwvCwqSB1jmmfLcbIWhOLx1/+boy/xmjgCs/OMUL8hRJSmnPw=="],
 

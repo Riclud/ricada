@@ -32,7 +32,7 @@ import "./common.ricada"
 // ------------------------------------------------------------
 
 config {
-  targets: [ts-client, ts-elysia, ts-nestjs, openapi, docs]
+  targets: [ts-server, ts-client, ts-elysia, ts-nestjs, openapi, docs]
   out: "./generated"
   wire: json
 

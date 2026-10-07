@@ -15,6 +15,10 @@ exports[`parser v2 reference example AST snapshot 1`] = `
             "items": [
               {
                 "kind": "word",
+                "value": "ts-server",
+              },
+              {
+                "kind": "word",
                 "value": "ts-client",
               },
               {

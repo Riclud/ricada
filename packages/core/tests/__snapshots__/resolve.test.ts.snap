@@ -257,6 +257,10 @@ exports[`resolver / IR reference example IR snapshot 1`] = `
           "items": [
             {
               "kind": "word",
+              "value": "ts-server",
+            },
+            {
+              "kind": "word",
               "value": "ts-client",
             },
             {
@@ -286,6 +290,7 @@ exports[`resolver / IR reference example IR snapshot 1`] = `
       "kind": "object",
     },
     "targets": [
+      "ts-server",
       "ts-client",
       "ts-elysia",
       "ts-nestjs",

@@ -702,7 +702,6 @@ exports[`openapi emitter reference example OpenAPI snapshot 1`] = `
                   "name",
                   "email",
                   "password",
-                  "role",
                 ],
                 "type": "object",
               },

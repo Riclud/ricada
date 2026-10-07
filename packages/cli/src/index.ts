@@ -4,9 +4,11 @@ import { dirname, join, resolve as pathResolve } from "node:path"
 import { compile, RicadaError } from "@ricada/core"
 import type { Emitter } from "@ricada/core"
 import { emitOpenApi } from "@ricada/emitter-openapi"
+import { emitTsServer } from "@ricada/emitter-ts-server"
 
 const EMITTERS: Record<string, Emitter> = {
   openapi: { name: "openapi", emit: emitOpenApi },
+  "ts-server": { name: "ts-server", emit: emitTsServer },
 }
 
 function findContract(): string | null {
