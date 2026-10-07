@@ -1,30 +1,18 @@
 {
   "name": "ricada",
-  "description": "Ricada — Bun hello via",
-  "version": "1.0.0",
-  "author": "Riclud",
-  "module": "index.ts",
-  "main": "./index.ts",
-  "scripts": {
-    "start": "bun run index.ts",
-    "dev": "bun --watch index.ts"
-  },
-  "keywords": [
-    "bun",
-    "hello",
-    "via",
-    "ricada"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Riclud/ricada.git"
-  },
-  "license": "MIT",
+  "private": true,
   "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "dev": "bun run examples/run.ts",
+    "start": "bun run examples/run.ts",
+    "typecheck": "tsc --noEmit"
   },
-  "peerDependencies": {
+  "dependencies": {
+    "@ricada/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
     "typescript": "^5"
   }
 }

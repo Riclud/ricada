@@ -1,0 +1,21 @@
+{
+  "name": "@ricada/core",
+  "version": "0.0.0",
+  "description": "Ricada language core: lexer, parser and AST",
+  "type": "module",
+  "module": "./src/index.ts",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

@@ -1,9 +1,9 @@
-import fs from "fs/promises";
-import { lex } from "./parser/lexer.ts";
-import { parse } from "./parser/parser.ts";
-import { ParseError } from "./parser/errors.ts";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs/promises";
+import { lex, parse, ParseError } from "@ricada/core";
 
-const text = await fs.readFile(".ricada", "utf-8");
+const file = fileURLToPath(new URL("./basic.ricada", import.meta.url));
+const text = await fs.readFile(file, "utf-8");
 const sourceLines = text.split("\n");
 
 try {
