@@ -1,0 +1,153 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`ts-client emitter client snapshot 1`] = `
+"import type * as T from "./types"
+import { routeValidators } from "./validators"
+
+export interface RequestInput {
+  params?: Record<string, unknown>
+  query?: Record<string, unknown>
+  headers?: Record<string, string>
+  body?: unknown
+}
+
+export interface RicadaRequest {
+  url: string
+  init: RequestInit
+}
+
+export interface ClientOptions {
+  baseUrl: string
+  headers?: Record<string, string>
+  fetch?: typeof fetch
+  /** Validate responses against the contract at runtime (recommended in dev). */
+  validate?: boolean
+  onRequest?: (req: RicadaRequest) => RequestInit | void
+}
+
+export class RicadaApiError<E = unknown> extends Error {
+  constructor(
+    public status: number,
+    public body: E,
+    public response: Response,
+  ) {
+    super(\`Ricada request failed with status \${status}\`)
+    this.name = "RicadaApiError"
+  }
+}
+
+function serializeQuery(query: Record<string, unknown>): string {
+  const parts: string[] = []
+  for (const [key, value] of Object.entries(query)) {
+    if (value === undefined) continue
+    if (Array.isArray(value)) {
+      for (const item of value) parts.push(\`\${encodeURIComponent(key)}=\${encodeURIComponent(String(item))}\`)
+    } else {
+      parts.push(\`\${encodeURIComponent(key)}=\${encodeURIComponent(String(value))}\`)
+    }
+  }
+  return parts.join("&")
+}
+
+export function createClient(options: ClientOptions) {
+  const doFetch = options.fetch ?? fetch
+
+  async function request<TRes>(
+    method: string,
+    path: string,
+    input: RequestInput | undefined,
+    routeName: string,
+  ): Promise<TRes> {
+    let url = options.baseUrl.replace(/\\/$/, "") + path
+    const headers: Record<string, string> = { ...(options.headers ?? {}) }
+    let body: string | undefined
+
+    if (input) {
+      if (input.params) {
+        for (const [key, value] of Object.entries(input.params)) {
+          url = url.replace(\`:\${key}\`, encodeURIComponent(String(value)))
+        }
+      }
+      if (input.query) {
+        const qs = serializeQuery(input.query)
+        if (qs) url += \`?\${qs}\`
+      }
+      if (input.headers) Object.assign(headers, input.headers)
+      if (input.body !== undefined) {
+        headers["content-type"] ??= "application/json"
+        body = JSON.stringify(input.body)
+      }
+    }
+
+    const init: RequestInit = { method, headers }
+    if (body !== undefined) init.body = body
+    const finalInit = options.onRequest?.({ url, init }) ?? init
+
+    const response = await doFetch(url, finalInit)
+    const text = await response.text()
+    const data = text ? JSON.parse(text) : undefined
+
+    if (!response.ok) throw new RicadaApiError(response.status, data, response)
+    if (options.validate) {
+      const validate = routeValidators[routeName]
+      if (validate && !validate(data)) {
+        throw new Error(\`Ricada: response for "\${routeName}" does not match the contract\`)
+      }
+    }
+    return data as TRes
+  }
+
+  return {
+    /** List users Returns a paginated list of users. */
+    async listUsers(input: T.ListUsersInput): Promise<T.PageOfUser> {
+      return request<T.PageOfUser>("GET", "/api/users", input, "listUsers")
+    },
+
+    /** Create a user Creates a new user and returns the created resource. */
+    async createUser(input: T.CreateUserInput): Promise<T.User> {
+      return request<T.User>("POST", "/api/users", input, "createUser")
+    },
+
+    /** Get a user by id Fetches a single user by its unique identifier. */
+    async getUser(input: T.GetUserInput): Promise<T.User> {
+      return request<T.User>("GET", "/api/users/:id", input, "getUser")
+    },
+
+    /** Update a user Updates an existing user. Superseded by PATCH. @deprecated */
+    async updateUser(input: T.UpdateUserInput): Promise<T.User> {
+      return request<T.User>("PUT", "/api/users/:id", input, "updateUser")
+    },
+
+    /** Delete a user Permanently deletes a user. Requires an admin role. */
+    async deleteUser(input: T.DeleteUserInput): Promise<void> {
+      return request<void>("DELETE", "/api/users/:id", input, "deleteUser")
+    },
+
+    /** List sessions for a user Returns all active sessions belonging to a user. */
+    async listUserSessions(input: T.ListUserSessionsInput): Promise<T.Session[]> {
+      return request<T.Session[]>("GET", "/api/users/:id/sessions", input, "listUserSessions")
+    },
+
+    /** Revoke a session Revokes a single session of a user. */
+    async revokeUserSession(input: T.RevokeUserSessionInput): Promise<void> {
+      return request<void>("DELETE", "/api/users/:id/sessions/:sessionId", input, "revokeUserSession")
+    },
+
+    /** Create a shape Accepts a discriminated union and echoes it back. */
+    async createShape(input: T.CreateShapeInput): Promise<T.Shape> {
+      return request<T.Shape>("POST", "/api/shapes", input, "createShape")
+    },
+
+    /** Get server statistics Returns aggregate server statistics. Requires the admin role. */
+    async getStats(input: T.GetStatsInput): Promise<T.ServerStats> {
+      return request<T.ServerStats>("GET", "/admin/stats", input, "getStats")
+    },
+
+    /** Ban a key Adds a key (JWT subject, API key or session) to the deny list. Delegates to the control plane. */
+    async denyKey(input: T.DenyKeyInput): Promise<void> {
+      return request<void>("POST", "/admin/deny", input, "denyKey")
+    },
+  }
+}
+"
+`;

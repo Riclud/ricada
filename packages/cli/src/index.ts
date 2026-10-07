@@ -5,11 +5,13 @@ import { compile, RicadaError } from "@ricada/core"
 import type { Emitter, Ir } from "@ricada/core"
 import { emitOpenApi } from "@ricada/emitter-openapi"
 import { emitTsServer } from "@ricada/emitter-ts-server"
+import { emitTsClient } from "@ricada/emitter-ts-client"
 import { formatReport, verifyImpl } from "./verify.ts"
 
 const EMITTERS: Record<string, Emitter> = {
   openapi: { name: "openapi", emit: emitOpenApi },
   "ts-server": { name: "ts-server", emit: emitTsServer },
+  "ts-client": { name: "ts-client", emit: emitTsClient },
 }
 
 interface Options {

@@ -8,6 +8,7 @@
         "@ricada/cli": "workspace:*",
         "@ricada/core": "workspace:*",
         "@ricada/emitter-openapi": "workspace:*",
+        "@ricada/emitter-ts-client": "workspace:*",
         "@ricada/emitter-ts-common": "workspace:*",
         "@ricada/emitter-ts-server": "workspace:*",
       },
@@ -26,6 +27,7 @@
       "dependencies": {
         "@ricada/core": "workspace:*",
         "@ricada/emitter-openapi": "workspace:*",
+        "@ricada/emitter-ts-client": "workspace:*",
         "@ricada/emitter-ts-common": "workspace:*",
         "@ricada/emitter-ts-server": "workspace:*",
       },
@@ -48,6 +50,17 @@
       "version": "0.0.0",
       "dependencies": {
         "@ricada/core": "workspace:*",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
+    "packages/emitter-ts-client": {
+      "name": "@ricada/emitter-ts-client",
+      "version": "0.0.0",
+      "dependencies": {
+        "@ricada/core": "workspace:*",
+        "@ricada/emitter-ts-common": "workspace:*",
       },
       "peerDependencies": {
         "typescript": "^5",
@@ -81,6 +94,8 @@
     "@ricada/core": ["@ricada/core@workspace:packages/core"],
 
     "@ricada/emitter-openapi": ["@ricada/emitter-openapi@workspace:packages/emitter-openapi"],
+
+    "@ricada/emitter-ts-client": ["@ricada/emitter-ts-client@workspace:packages/emitter-ts-client"],
 
     "@ricada/emitter-ts-common": ["@ricada/emitter-ts-common@workspace:packages/emitter-ts-common"],
 

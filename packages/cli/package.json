@@ -18,6 +18,7 @@
   "dependencies": {
     "@ricada/core": "workspace:*",
     "@ricada/emitter-openapi": "workspace:*",
+    "@ricada/emitter-ts-client": "workspace:*",
     "@ricada/emitter-ts-common": "workspace:*",
     "@ricada/emitter-ts-server": "workspace:*"
   },
