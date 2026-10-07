@@ -1,0 +1,2990 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`parser v2 reference example AST snapshot 1`] = `
+{
+  "declarations": [
+    {
+      "kind": "import",
+      "source": "./common.ricada",
+    },
+    {
+      "entries": [
+        {
+          "key": "targets",
+          "value": {
+            "items": [
+              {
+                "kind": "word",
+                "value": "ts-client",
+              },
+              {
+                "kind": "word",
+                "value": "ts-elysia",
+              },
+              {
+                "kind": "word",
+                "value": "ts-nestjs",
+              },
+              {
+                "kind": "word",
+                "value": "openapi",
+              },
+              {
+                "kind": "word",
+                "value": "docs",
+              },
+            ],
+            "kind": "array",
+          },
+        },
+        {
+          "key": "out",
+          "value": {
+            "kind": "string",
+            "value": "./generated",
+          },
+        },
+        {
+          "key": "wire",
+          "value": {
+            "kind": "word",
+            "value": "json",
+          },
+        },
+        {
+          "key": "auth",
+          "value": {
+            "entries": [
+              {
+                "key": "bearer",
+                "value": {
+                  "entries": [
+                    {
+                      "key": "type",
+                      "value": {
+                        "kind": "word",
+                        "value": "jwt",
+                      },
+                    },
+                    {
+                      "key": "issuer",
+                      "value": {
+                        "args": [
+                          {
+                            "kind": "string",
+                            "value": "JWT_ISSUER",
+                          },
+                        ],
+                        "kind": "call",
+                        "name": "env",
+                      },
+                    },
+                    {
+                      "key": "audience",
+                      "value": {
+                        "kind": "string",
+                        "value": "api",
+                      },
+                    },
+                    {
+                      "key": "secret",
+                      "value": {
+                        "args": [
+                          {
+                            "kind": "string",
+                            "value": "JWT_SECRET",
+                          },
+                        ],
+                        "kind": "call",
+                        "name": "env",
+                      },
+                    },
+                    {
+                      "key": "algorithm",
+                      "value": {
+                        "kind": "word",
+                        "value": "HS256",
+                      },
+                    },
+                  ],
+                  "kind": "object",
+                },
+              },
+              {
+                "key": "apiKey",
+                "value": {
+                  "entries": [
+                    {
+                      "key": "type",
+                      "value": {
+                        "kind": "word",
+                        "value": "apiKey",
+                      },
+                    },
+                    {
+                      "key": "in",
+                      "value": {
+                        "kind": "word",
+                        "value": "header",
+                      },
+                    },
+                    {
+                      "key": "name",
+                      "value": {
+                        "kind": "string",
+                        "value": "X-API-Key",
+                      },
+                    },
+                    {
+                      "key": "key",
+                      "value": {
+                        "args": [
+                          {
+                            "kind": "string",
+                            "value": "API_KEY",
+                          },
+                        ],
+                        "kind": "call",
+                        "name": "env",
+                      },
+                    },
+                  ],
+                  "kind": "object",
+                },
+              },
+            ],
+            "kind": "object",
+          },
+        },
+        {
+          "key": "cors",
+          "value": {
+            "entries": [
+              {
+                "key": "origins",
+                "value": {
+                  "items": [
+                    {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "value": "APP_ORIGIN",
+                        },
+                      ],
+                      "kind": "call",
+                      "name": "env",
+                    },
+                  ],
+                  "kind": "array",
+                },
+              },
+              {
+                "key": "methods",
+                "value": {
+                  "items": [
+                    {
+                      "kind": "word",
+                      "value": "GET",
+                    },
+                    {
+                      "kind": "word",
+                      "value": "POST",
+                    },
+                    {
+                      "kind": "word",
+                      "value": "PUT",
+                    },
+                    {
+                      "kind": "word",
+                      "value": "PATCH",
+                    },
+                    {
+                      "kind": "word",
+                      "value": "DELETE",
+                    },
+                  ],
+                  "kind": "array",
+                },
+              },
+              {
+                "key": "headers",
+                "value": {
+                  "items": [
+                    {
+                      "kind": "string",
+                      "value": "Authorization",
+                    },
+                    {
+                      "kind": "string",
+                      "value": "Content-Type",
+                    },
+                    {
+                      "kind": "string",
+                      "value": "Idempotency-Key",
+                    },
+                  ],
+                  "kind": "array",
+                },
+              },
+              {
+                "key": "credentials",
+                "value": {
+                  "kind": "word",
+                  "value": "true",
+                },
+              },
+              {
+                "key": "maxAge",
+                "value": {
+                  "kind": "string",
+                  "value": "1h",
+                },
+              },
+            ],
+            "kind": "object",
+          },
+        },
+        {
+          "key": "security",
+          "value": {
+            "entries": [
+              {
+                "key": "headers",
+                "value": {
+                  "entries": [
+                    {
+                      "key": "hsts",
+                      "value": {
+                        "kind": "word",
+                        "value": "true",
+                      },
+                    },
+                    {
+                      "key": "xContentTypeOptions",
+                      "value": {
+                        "kind": "word",
+                        "value": "nosniff",
+                      },
+                    },
+                    {
+                      "key": "xFrameOptions",
+                      "value": {
+                        "kind": "word",
+                        "value": "DENY",
+                      },
+                    },
+                    {
+                      "key": "referrerPolicy",
+                      "value": {
+                        "kind": "string",
+                        "value": "no-referrer",
+                      },
+                    },
+                    {
+                      "key": "contentSecurityPolicy",
+                      "value": {
+                        "kind": "string",
+                        "value": "default-src 'self'",
+                      },
+                    },
+                  ],
+                  "kind": "object",
+                },
+              },
+            ],
+            "kind": "object",
+          },
+        },
+        {
+          "key": "rateLimit",
+          "value": {
+            "entries": [
+              {
+                "key": "algorithm",
+                "value": {
+                  "kind": "word",
+                  "value": "tokenBucket",
+                },
+              },
+              {
+                "key": "store",
+                "value": {
+                  "kind": "word",
+                  "value": "memory",
+                },
+              },
+              {
+                "key": "default",
+                "value": {
+                  "entries": [
+                    {
+                      "key": "limit",
+                      "value": {
+                        "kind": "number",
+                        "value": "1000",
+                      },
+                    },
+                    {
+                      "key": "window",
+                      "value": {
+                        "kind": "string",
+                        "value": "1m",
+                      },
+                    },
+                    {
+                      "key": "key",
+                      "value": {
+                        "kind": "word",
+                        "value": "ip",
+                      },
+                    },
+                    {
+                      "key": "burst",
+                      "value": {
+                        "kind": "number",
+                        "value": "50",
+                      },
+                    },
+                  ],
+                  "kind": "object",
+                },
+              },
+            ],
+            "kind": "object",
+          },
+        },
+        {
+          "key": "control",
+          "value": {
+            "entries": [
+              {
+                "key": "secret",
+                "value": {
+                  "args": [
+                    {
+                      "kind": "string",
+                      "value": "RICADA_CONTROL_SECRET",
+                    },
+                  ],
+                  "kind": "call",
+                  "name": "env",
+                },
+              },
+              {
+                "key": "allow",
+                "value": {
+                  "items": [
+                    {
+                      "kind": "word",
+                      "value": "rateLimit",
+                    },
+                    {
+                      "kind": "word",
+                      "value": "deny",
+                    },
+                    {
+                      "kind": "word",
+                      "value": "cache",
+                    },
+                    {
+                      "kind": "word",
+                      "value": "metrics",
+                    },
+                    {
+                      "kind": "word",
+                      "value": "breaker",
+                    },
+                  ],
+                  "kind": "array",
+                },
+              },
+            ],
+            "kind": "object",
+          },
+        },
+      ],
+      "kind": "config",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "field",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "reason",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+      ],
+      "kind": "object",
+      "name": "FieldError",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "message",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": {
+            "kind": "string",
+            "value": "BAD_REQUEST",
+          },
+          "name": "code",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+      ],
+      "kind": "error",
+      "name": "BadRequest",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "message",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": {
+            "kind": "string",
+            "value": "UNAUTHORIZED",
+          },
+          "name": "code",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+      ],
+      "kind": "error",
+      "name": "Unauthorized",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "message",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": {
+            "kind": "string",
+            "value": "FORBIDDEN",
+          },
+          "name": "code",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+      ],
+      "kind": "error",
+      "name": "Forbidden",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "message",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": {
+            "kind": "string",
+            "value": "NOT_FOUND",
+          },
+          "name": "code",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+      ],
+      "kind": "error",
+      "name": "NotFound",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "message",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": {
+            "kind": "string",
+            "value": "CONFLICT",
+          },
+          "name": "code",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+      ],
+      "kind": "error",
+      "name": "Conflict",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "message",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": {
+            "kind": "string",
+            "value": "TOO_MANY_REQUESTS",
+          },
+          "name": "code",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "retryAfter",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "int",
+          },
+        },
+      ],
+      "kind": "error",
+      "name": "TooManyRequests",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "message",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "fields",
+          "optional": false,
+          "type": {
+            "array": true,
+            "literal": false,
+            "name": "FieldError",
+          },
+        },
+      ],
+      "kind": "error",
+      "name": "ValidationFailed",
+    },
+    {
+      "kind": "enum",
+      "members": [
+        "admin",
+        "user",
+        "guest",
+      ],
+      "name": "Role",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "1",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "200",
+                  },
+                },
+              ],
+              "name": "max",
+            },
+          ],
+          "default": null,
+          "name": "street",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "1",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "100",
+                  },
+                },
+              ],
+              "name": "max",
+            },
+          ],
+          "default": null,
+          "name": "city",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "^[0-9]{5}$",
+                  },
+                },
+              ],
+              "name": "regex",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "90210",
+                  },
+                },
+              ],
+              "name": "example",
+            },
+          ],
+          "default": null,
+          "name": "zip",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": {
+            "kind": "string",
+            "value": "US",
+          },
+          "name": "country",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+      ],
+      "kind": "object",
+      "name": "Address",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [
+            {
+              "args": [],
+              "name": "uuid",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "550e8400-e29b-41d4-a716-446655440000",
+                  },
+                },
+              ],
+              "name": "example",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Unique identifier",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+          ],
+          "default": null,
+          "name": "id",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "1",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "100",
+                  },
+                },
+              ],
+              "name": "max",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Jane Doe",
+                  },
+                },
+              ],
+              "name": "example",
+            },
+          ],
+          "default": null,
+          "name": "name",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [],
+              "name": "email",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "jane@example.com",
+                  },
+                },
+              ],
+              "name": "example",
+            },
+          ],
+          "default": null,
+          "name": "email",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "0",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "150",
+                  },
+                },
+              ],
+              "name": "max",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "30",
+                  },
+                },
+              ],
+              "name": "example",
+            },
+          ],
+          "default": null,
+          "name": "age",
+          "optional": true,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "int",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "0",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "5",
+                  },
+                },
+              ],
+              "name": "max",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "4.5",
+                  },
+                },
+              ],
+              "name": "example",
+            },
+          ],
+          "default": null,
+          "name": "score",
+          "optional": true,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "float",
+          },
+        },
+        {
+          "annotations": [],
+          "default": {
+            "kind": "word",
+            "value": "true",
+          },
+          "name": "active",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "bool",
+          },
+        },
+        {
+          "annotations": [],
+          "default": {
+            "kind": "word",
+            "value": "user",
+          },
+          "name": "role",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "Role",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "tags",
+          "optional": false,
+          "type": {
+            "array": true,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "address",
+          "optional": true,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "Address",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "createdAt",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "datetime",
+          },
+        },
+      ],
+      "kind": "object",
+      "name": "User",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "items",
+          "optional": false,
+          "type": {
+            "array": true,
+            "literal": false,
+            "name": "User",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "0",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+          ],
+          "default": null,
+          "name": "total",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "int",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "1",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+          ],
+          "default": null,
+          "name": "page",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "int",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "1",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+          ],
+          "default": null,
+          "name": "size",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "int",
+          },
+        },
+      ],
+      "kind": "object",
+      "name": "PageOfUser",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [],
+          "default": null,
+          "name": "users",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "int",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "activeUsers",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "int",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "requests",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "int",
+          },
+        },
+      ],
+      "kind": "object",
+      "name": "ServerStats",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [
+            {
+              "args": [],
+              "name": "uuid",
+            },
+          ],
+          "default": null,
+          "name": "id",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "userAgent",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "ip",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "string",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "createdAt",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "datetime",
+          },
+        },
+        {
+          "annotations": [],
+          "default": null,
+          "name": "expiresAt",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "datetime",
+          },
+        },
+      ],
+      "kind": "object",
+      "name": "Session",
+    },
+    {
+      "kind": "alias",
+      "name": "Id",
+      "union": [
+        {
+          "array": false,
+          "literal": false,
+          "name": "string",
+        },
+        {
+          "array": false,
+          "literal": false,
+          "name": "int",
+        },
+      ],
+    },
+    {
+      "kind": "alias",
+      "name": "MaybeAddress",
+      "union": [
+        {
+          "array": false,
+          "literal": false,
+          "name": "Address",
+        },
+        {
+          "array": false,
+          "literal": false,
+          "name": "null",
+        },
+      ],
+    },
+    {
+      "fields": [
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "circle",
+                  },
+                },
+              ],
+              "name": "example",
+            },
+          ],
+          "default": null,
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": true,
+            "name": "circle",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "0",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+          ],
+          "default": null,
+          "name": "radius",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "float",
+          },
+        },
+      ],
+      "kind": "object",
+      "name": "Circle",
+    },
+    {
+      "fields": [
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "square",
+                  },
+                },
+              ],
+              "name": "example",
+            },
+          ],
+          "default": null,
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": true,
+            "name": "square",
+          },
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "number",
+                    "value": "0",
+                  },
+                },
+              ],
+              "name": "min",
+            },
+          ],
+          "default": null,
+          "name": "side",
+          "optional": false,
+          "type": {
+            "array": false,
+            "literal": false,
+            "name": "float",
+          },
+        },
+      ],
+      "kind": "object",
+      "name": "Square",
+    },
+    {
+      "kind": "alias",
+      "name": "Shape",
+      "union": [
+        {
+          "array": false,
+          "literal": false,
+          "name": "Circle",
+        },
+        {
+          "array": false,
+          "literal": false,
+          "name": "Square",
+        },
+      ],
+    },
+    {
+      "items": [
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Users",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "List users",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Returns a paginated list of users.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "word",
+                    "value": "bearer",
+                  },
+                },
+                {
+                  "name": "scopes",
+                  "value": {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "read:users",
+                      },
+                    ],
+                    "kind": "array",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+            {
+              "args": [
+                {
+                  "name": "limit",
+                  "value": {
+                    "kind": "number",
+                    "value": "120",
+                  },
+                },
+                {
+                  "name": "window",
+                  "value": {
+                    "kind": "string",
+                    "value": "1m",
+                  },
+                },
+                {
+                  "name": "key",
+                  "value": {
+                    "kind": "word",
+                    "value": "jwt.sub",
+                  },
+                },
+                {
+                  "name": "burst",
+                  "value": {
+                    "kind": "number",
+                    "value": "30",
+                  },
+                },
+              ],
+              "name": "rateLimit",
+            },
+            {
+              "args": [
+                {
+                  "name": "ttl",
+                  "value": {
+                    "kind": "number",
+                    "value": "30",
+                  },
+                },
+                {
+                  "name": "key",
+                  "value": {
+                    "kind": "string",
+                    "value": "users:{page}:{size}:{role}:{active}",
+                  },
+                },
+              ],
+              "name": "cache",
+            },
+          ],
+          "errors": [
+            {
+              "status": 401,
+              "type": "Unauthorized",
+            },
+            {
+              "status": 403,
+              "type": "Forbidden",
+            },
+            {
+              "status": 429,
+              "type": "TooManyRequests",
+            },
+          ],
+          "handler": "listUsers",
+          "kind": "route",
+          "method": "GET",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "1",
+                          },
+                        },
+                      ],
+                      "name": "min",
+                    },
+                  ],
+                  "default": null,
+                  "name": "page",
+                  "optional": true,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "int",
+                  },
+                },
+                {
+                  "annotations": [
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "1",
+                          },
+                        },
+                      ],
+                      "name": "min",
+                    },
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "100",
+                          },
+                        },
+                      ],
+                      "name": "max",
+                    },
+                  ],
+                  "default": null,
+                  "name": "size",
+                  "optional": true,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "int",
+                  },
+                },
+                {
+                  "annotations": [],
+                  "default": null,
+                  "name": "role",
+                  "optional": true,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "Role",
+                  },
+                },
+                {
+                  "annotations": [],
+                  "default": null,
+                  "name": "active",
+                  "optional": true,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "bool",
+                  },
+                },
+              ],
+              "in": "query",
+            },
+          ],
+          "path": "/users",
+          "returns": [
+            {
+              "status": 200,
+              "type": {
+                "array": false,
+                "literal": false,
+                "name": "PageOfUser",
+              },
+            },
+          ],
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Users",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Create a user",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Creates a new user and returns the created resource.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": "public",
+                  "value": {
+                    "kind": "word",
+                    "value": "true",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+            {
+              "args": [
+                {
+                  "name": "limit",
+                  "value": {
+                    "kind": "number",
+                    "value": "20",
+                  },
+                },
+                {
+                  "name": "window",
+                  "value": {
+                    "kind": "string",
+                    "value": "1m",
+                  },
+                },
+                {
+                  "name": "key",
+                  "value": {
+                    "kind": "word",
+                    "value": "ip",
+                  },
+                },
+              ],
+              "name": "rateLimit",
+            },
+          ],
+          "errors": [
+            {
+              "status": 400,
+              "type": "ValidationFailed",
+            },
+            {
+              "status": 409,
+              "type": "Conflict",
+            },
+            {
+              "status": 429,
+              "type": "TooManyRequests",
+            },
+          ],
+          "handler": "createUser",
+          "kind": "route",
+          "method": "POST",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "1",
+                          },
+                        },
+                      ],
+                      "name": "min",
+                    },
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "100",
+                          },
+                        },
+                      ],
+                      "name": "max",
+                    },
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "string",
+                            "value": "Jane Doe",
+                          },
+                        },
+                      ],
+                      "name": "example",
+                    },
+                  ],
+                  "default": null,
+                  "name": "name",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+                {
+                  "annotations": [
+                    {
+                      "args": [],
+                      "name": "email",
+                    },
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "string",
+                            "value": "jane@example.com",
+                          },
+                        },
+                      ],
+                      "name": "example",
+                    },
+                  ],
+                  "default": null,
+                  "name": "email",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+                {
+                  "annotations": [
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "8",
+                          },
+                        },
+                      ],
+                      "name": "min",
+                    },
+                    {
+                      "args": [],
+                      "name": "sensitive",
+                    },
+                  ],
+                  "default": null,
+                  "name": "password",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+                {
+                  "annotations": [
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "0",
+                          },
+                        },
+                      ],
+                      "name": "min",
+                    },
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "150",
+                          },
+                        },
+                      ],
+                      "name": "max",
+                    },
+                  ],
+                  "default": null,
+                  "name": "age",
+                  "optional": true,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "int",
+                  },
+                },
+                {
+                  "annotations": [],
+                  "default": {
+                    "kind": "word",
+                    "value": "user",
+                  },
+                  "name": "role",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "Role",
+                  },
+                },
+              ],
+              "in": "body",
+            },
+          ],
+          "path": "/users",
+          "returns": [
+            {
+              "status": 201,
+              "type": {
+                "array": false,
+                "literal": false,
+                "name": "User",
+              },
+            },
+          ],
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Users",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Get a user by id",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Fetches a single user by its unique identifier.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "word",
+                    "value": "bearer",
+                  },
+                },
+                {
+                  "name": "scopes",
+                  "value": {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "read:users",
+                      },
+                    ],
+                    "kind": "array",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+          ],
+          "errors": [
+            {
+              "status": 401,
+              "type": "Unauthorized",
+            },
+            {
+              "status": 404,
+              "type": "NotFound",
+            },
+          ],
+          "handler": "getUser",
+          "kind": "route",
+          "method": "GET",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [
+                    {
+                      "args": [],
+                      "name": "uuid",
+                    },
+                  ],
+                  "default": null,
+                  "name": "id",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+              ],
+              "in": "params",
+            },
+          ],
+          "path": "/users/:id",
+          "returns": [
+            {
+              "status": 200,
+              "type": {
+                "array": false,
+                "literal": false,
+                "name": "User",
+              },
+            },
+          ],
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Users",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Update a user",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Updates an existing user. Superseded by PATCH.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "word",
+                    "value": "bearer",
+                  },
+                },
+                {
+                  "name": "scopes",
+                  "value": {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "write:users",
+                      },
+                    ],
+                    "kind": "array",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+            {
+              "args": [
+                {
+                  "name": "reason",
+                  "value": {
+                    "kind": "string",
+                    "value": "Use PATCH /users/:id instead",
+                  },
+                },
+              ],
+              "name": "deprecated",
+            },
+          ],
+          "errors": [
+            {
+              "status": 400,
+              "type": "ValidationFailed",
+            },
+            {
+              "status": 401,
+              "type": "Unauthorized",
+            },
+            {
+              "status": 404,
+              "type": "NotFound",
+            },
+            {
+              "status": 409,
+              "type": "Conflict",
+            },
+          ],
+          "handler": "updateUser",
+          "kind": "route",
+          "method": "PUT",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [
+                    {
+                      "args": [],
+                      "name": "uuid",
+                    },
+                  ],
+                  "default": null,
+                  "name": "id",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+              ],
+              "in": "params",
+            },
+            {
+              "fields": [
+                {
+                  "annotations": [
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "1",
+                          },
+                        },
+                      ],
+                      "name": "min",
+                    },
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "100",
+                          },
+                        },
+                      ],
+                      "name": "max",
+                    },
+                  ],
+                  "default": null,
+                  "name": "name",
+                  "optional": true,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+                {
+                  "annotations": [
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "0",
+                          },
+                        },
+                      ],
+                      "name": "min",
+                    },
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "number",
+                            "value": "150",
+                          },
+                        },
+                      ],
+                      "name": "max",
+                    },
+                  ],
+                  "default": null,
+                  "name": "age",
+                  "optional": true,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "int",
+                  },
+                },
+                {
+                  "annotations": [],
+                  "default": null,
+                  "name": "address",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "MaybeAddress",
+                  },
+                },
+              ],
+              "in": "body",
+            },
+          ],
+          "path": "/users/:id",
+          "returns": [
+            {
+              "status": 200,
+              "type": {
+                "array": false,
+                "literal": false,
+                "name": "User",
+              },
+            },
+          ],
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Users",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Delete a user",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Permanently deletes a user. Requires an admin role.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "word",
+                    "value": "bearer",
+                  },
+                },
+                {
+                  "name": "roles",
+                  "value": {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "admin",
+                      },
+                    ],
+                    "kind": "array",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+          ],
+          "errors": [
+            {
+              "status": 401,
+              "type": "Unauthorized",
+            },
+            {
+              "status": 403,
+              "type": "Forbidden",
+            },
+            {
+              "status": 404,
+              "type": "NotFound",
+            },
+          ],
+          "handler": "deleteUser",
+          "kind": "route",
+          "method": "DELETE",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [
+                    {
+                      "args": [],
+                      "name": "uuid",
+                    },
+                  ],
+                  "default": null,
+                  "name": "id",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+              ],
+              "in": "params",
+            },
+          ],
+          "path": "/users/:id",
+          "returns": [
+            {
+              "status": 204,
+              "type": null,
+            },
+          ],
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Sessions",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "List sessions for a user",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Returns all active sessions belonging to a user.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "word",
+                    "value": "bearer",
+                  },
+                },
+                {
+                  "name": "scopes",
+                  "value": {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "read:users",
+                      },
+                    ],
+                    "kind": "array",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+          ],
+          "errors": [
+            {
+              "status": 401,
+              "type": "Unauthorized",
+            },
+            {
+              "status": 404,
+              "type": "NotFound",
+            },
+          ],
+          "handler": "listUserSessions",
+          "kind": "route",
+          "method": "GET",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [
+                    {
+                      "args": [],
+                      "name": "uuid",
+                    },
+                  ],
+                  "default": null,
+                  "name": "id",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+              ],
+              "in": "params",
+            },
+          ],
+          "path": "/users/:id/sessions",
+          "returns": [
+            {
+              "status": 200,
+              "type": {
+                "array": true,
+                "literal": false,
+                "name": "Session",
+              },
+            },
+          ],
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Sessions",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Revoke a session",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Revokes a single session of a user.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "word",
+                    "value": "bearer",
+                  },
+                },
+                {
+                  "name": "scopes",
+                  "value": {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "write:users",
+                      },
+                    ],
+                    "kind": "array",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+          ],
+          "errors": [
+            {
+              "status": 401,
+              "type": "Unauthorized",
+            },
+            {
+              "status": 404,
+              "type": "NotFound",
+            },
+          ],
+          "handler": "revokeUserSession",
+          "kind": "route",
+          "method": "DELETE",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [
+                    {
+                      "args": [],
+                      "name": "uuid",
+                    },
+                  ],
+                  "default": null,
+                  "name": "id",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+                {
+                  "annotations": [
+                    {
+                      "args": [],
+                      "name": "uuid",
+                    },
+                  ],
+                  "default": null,
+                  "name": "sessionId",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+              ],
+              "in": "params",
+            },
+          ],
+          "path": "/users/:id/sessions/:sessionId",
+          "returns": [
+            {
+              "status": 204,
+              "type": null,
+            },
+          ],
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Shapes",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Create a shape",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Accepts a discriminated union and echoes it back.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": "public",
+                  "value": {
+                    "kind": "word",
+                    "value": "true",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+          ],
+          "errors": [
+            {
+              "status": 400,
+              "type": "ValidationFailed",
+            },
+          ],
+          "handler": "createShape",
+          "kind": "route",
+          "method": "POST",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [],
+                  "default": null,
+                  "name": "shape",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "Shape",
+                  },
+                },
+              ],
+              "in": "body",
+            },
+          ],
+          "path": "/shapes",
+          "returns": [
+            {
+              "status": 201,
+              "type": {
+                "array": false,
+                "literal": false,
+                "name": "Shape",
+              },
+            },
+          ],
+        },
+      ],
+      "kind": "group",
+      "path": "/api",
+    },
+    {
+      "items": [
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Admin",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Get server statistics",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Returns aggregate server statistics. Requires the admin role.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "word",
+                    "value": "bearer",
+                  },
+                },
+                {
+                  "name": "roles",
+                  "value": {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "admin",
+                      },
+                    ],
+                    "kind": "array",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+            {
+              "args": [
+                {
+                  "name": "limit",
+                  "value": {
+                    "kind": "number",
+                    "value": "30",
+                  },
+                },
+                {
+                  "name": "window",
+                  "value": {
+                    "kind": "string",
+                    "value": "1m",
+                  },
+                },
+                {
+                  "name": "key",
+                  "value": {
+                    "kind": "word",
+                    "value": "jwt.sub",
+                  },
+                },
+                {
+                  "name": "burst",
+                  "value": {
+                    "kind": "number",
+                    "value": "5",
+                  },
+                },
+              ],
+              "name": "rateLimit",
+            },
+          ],
+          "errors": [
+            {
+              "status": 401,
+              "type": "Unauthorized",
+            },
+            {
+              "status": 403,
+              "type": "Forbidden",
+            },
+            {
+              "status": 429,
+              "type": "TooManyRequests",
+            },
+          ],
+          "handler": "getStats",
+          "kind": "route",
+          "method": "GET",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [],
+                  "default": null,
+                  "name": "authorization",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+                {
+                  "annotations": [],
+                  "default": null,
+                  "name": "x-request-id",
+                  "optional": true,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+              ],
+              "in": "headers",
+            },
+          ],
+          "path": "/stats",
+          "returns": [
+            {
+              "status": 200,
+              "type": {
+                "array": false,
+                "literal": false,
+                "name": "ServerStats",
+              },
+            },
+          ],
+        },
+        {
+          "annotations": [
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Admin",
+                  },
+                },
+              ],
+              "name": "tag",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Ban a key",
+                  },
+                },
+              ],
+              "name": "summary",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "string",
+                    "value": "Adds a key (JWT subject, API key or session) to the deny list. Delegates to the control plane.",
+                  },
+                },
+              ],
+              "name": "description",
+            },
+            {
+              "args": [
+                {
+                  "name": null,
+                  "value": {
+                    "kind": "word",
+                    "value": "bearer",
+                  },
+                },
+                {
+                  "name": "roles",
+                  "value": {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "admin",
+                      },
+                    ],
+                    "kind": "array",
+                  },
+                },
+              ],
+              "name": "auth",
+            },
+          ],
+          "errors": [
+            {
+              "status": 400,
+              "type": "ValidationFailed",
+            },
+            {
+              "status": 401,
+              "type": "Unauthorized",
+            },
+            {
+              "status": 403,
+              "type": "Forbidden",
+            },
+          ],
+          "handler": "denyKey",
+          "kind": "route",
+          "method": "POST",
+          "params": [
+            {
+              "fields": [
+                {
+                  "annotations": [],
+                  "default": null,
+                  "name": "key",
+                  "optional": false,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+                {
+                  "annotations": [
+                    {
+                      "args": [
+                        {
+                          "name": null,
+                          "value": {
+                            "kind": "string",
+                            "value": "24h",
+                          },
+                        },
+                      ],
+                      "name": "example",
+                    },
+                  ],
+                  "default": null,
+                  "name": "ttl",
+                  "optional": true,
+                  "type": {
+                    "array": false,
+                    "literal": false,
+                    "name": "string",
+                  },
+                },
+              ],
+              "in": "body",
+            },
+          ],
+          "path": "/deny",
+          "returns": [
+            {
+              "status": 204,
+              "type": null,
+            },
+          ],
+        },
+      ],
+      "kind": "group",
+      "path": "/admin",
+    },
+  ],
+}
+`;

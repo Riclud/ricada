@@ -31,3 +31,5 @@ export class RicadaError extends Error {
 }
 
 export class LexError extends RicadaError {}
+
+export class ParseError extends RicadaError {}
