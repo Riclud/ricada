@@ -1,0 +1,6422 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`lexer v2 reference example token snapshot 1`] = `
+[
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "import",
+  },
+  {
+    "type": "STRING",
+    "value": "./common.ricada",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "config",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "targets",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ts-client",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ts-elysia",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ts-nestjs",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "openapi",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "docs",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "out",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "./generated",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "wire",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "json",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "auth",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bearer",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "jwt",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "issuer",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "env",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "JWT_ISSUER",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "audience",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "api",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "secret",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "env",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "JWT_SECRET",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "algorithm",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "HS256",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "apiKey",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "apiKey",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "in",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "header",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "name",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "X-API-Key",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "key",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "env",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "API_KEY",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "cors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "origins",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "env",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "APP_ORIGIN",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "methods",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "GET",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "POST",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "PUT",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "PATCH",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "DELETE",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "headers",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Authorization",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Content-Type",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Idempotency-Key",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "credentials",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "true",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "maxAge",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "1h",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "security",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "headers",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "hsts",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "true",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "xContentTypeOptions",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "nosniff",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "xFrameOptions",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "DENY",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "referrerPolicy",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "no-referrer",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "contentSecurityPolicy",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "default-src 'self'",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "rateLimit",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "algorithm",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "tokenBucket",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "store",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "memory",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "default",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "limit",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1000",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "window",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "1m",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "key",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ip",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "burst",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "50",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "control",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "secret",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "env",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "RICADA_CONTROL_SECRET",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "allow",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "rateLimit",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "deny",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "cache",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "metrics",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "breaker",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "FieldError",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "field",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "reason",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "error",
+  },
+  {
+    "type": "WORD",
+    "value": "BadRequest",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "message",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "code",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "BAD_REQUEST",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "error",
+  },
+  {
+    "type": "WORD",
+    "value": "Unauthorized",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "message",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "code",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "UNAUTHORIZED",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "error",
+  },
+  {
+    "type": "WORD",
+    "value": "Forbidden",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "message",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "code",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "FORBIDDEN",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "error",
+  },
+  {
+    "type": "WORD",
+    "value": "NotFound",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "message",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "code",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "NOT_FOUND",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "error",
+  },
+  {
+    "type": "WORD",
+    "value": "Conflict",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "message",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "code",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "CONFLICT",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "error",
+  },
+  {
+    "type": "WORD",
+    "value": "TooManyRequests",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "message",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "code",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "TOO_MANY_REQUESTS",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "retryAfter",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "error",
+  },
+  {
+    "type": "WORD",
+    "value": "ValidationFailed",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "message",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "fields",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "FieldError",
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "enum",
+  },
+  {
+    "type": "WORD",
+    "value": "Role",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "admin",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "user",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "guest",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "Address",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "street",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "200",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "city",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "100",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "zip",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "regex",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "^[0-9]{5}$",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "90210",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "country",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "US",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "User",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "id",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "uuid",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "550e8400-e29b-41d4-a716-446655440000",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Unique identifier",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "name",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "100",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Jane Doe",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "email",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "email",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "jane@example.com",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "age",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "0",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "150",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "30",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "score",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "float",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "0",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "5",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "4.5",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "active",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bool",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "true",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "role",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Role",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "user",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "tags",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "address",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Address",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "createdAt",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "datetime",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "PageOfUser",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "items",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "User",
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "total",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "0",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "page",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "size",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "ServerStats",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "users",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "activeUsers",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "requests",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "Session",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "id",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "uuid",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "userAgent",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ip",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "createdAt",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "datetime",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "expiresAt",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "datetime",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "Id",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "PIPE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "MaybeAddress",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Address",
+  },
+  {
+    "type": "PIPE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "null",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "Circle",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "kind",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "circle",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "circle",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "radius",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "float",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "0",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "Square",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "kind",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "square",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "square",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "side",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "float",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "0",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "type",
+  },
+  {
+    "type": "WORD",
+    "value": "Shape",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Circle",
+  },
+  {
+    "type": "PIPE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Square",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "PATH",
+    "value": "/api",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "GET",
+  },
+  {
+    "type": "PATH",
+    "value": "/users",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Users",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "List users",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Returns a paginated list of users.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bearer",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "scopes",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "read:users",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "rateLimit",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "limit",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "120",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "window",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "1m",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "key",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "jwt",
+  },
+  {
+    "type": "DOT",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "sub",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "burst",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "30",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "query",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "page",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "size",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "100",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "role",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Role",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "active",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bool",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "200",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "PageOfUser",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "401",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Unauthorized",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "403",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Forbidden",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "429",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "TooManyRequests",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "listUsers",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "cache",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ttl",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "30",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "key",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "users:{page}:{size}:{role}:{active}",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "POST",
+  },
+  {
+    "type": "PATH",
+    "value": "/users",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Users",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Create a user",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Creates a new user and returns the created resource.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "public",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "true",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "rateLimit",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "limit",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "20",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "window",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "1m",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "key",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ip",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "body",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "name",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "100",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Jane Doe",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "email",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "email",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "jane@example.com",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "password",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "8",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "sensitive",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "age",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "0",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "150",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "role",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Role",
+  },
+  {
+    "type": "EQUALS",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "user",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "201",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "User",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "400",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ValidationFailed",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "409",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Conflict",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "429",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "TooManyRequests",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "createUser",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "GET",
+  },
+  {
+    "type": "PATH",
+    "value": "/users/:id",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Users",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Get a user by id",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Fetches a single user by its unique identifier.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bearer",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "scopes",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "read:users",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "params",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "id",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "uuid",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "200",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "User",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "401",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Unauthorized",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "404",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "NotFound",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "getUser",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "PUT",
+  },
+  {
+    "type": "PATH",
+    "value": "/users/:id",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Users",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Update a user",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Updates an existing user. Superseded by PATCH.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bearer",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "scopes",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "write:users",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "params",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "id",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "uuid",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "body",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "name",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "1",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "100",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "age",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "int",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "min",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "0",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "max",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "150",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "address",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "MaybeAddress",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "200",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "User",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "400",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ValidationFailed",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "401",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Unauthorized",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "404",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "NotFound",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "409",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Conflict",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "updateUser",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "deprecated",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "reason",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Use PATCH /users/:id instead",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "DELETE",
+  },
+  {
+    "type": "PATH",
+    "value": "/users/:id",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Users",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Delete a user",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Permanently deletes a user. Requires an admin role.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bearer",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "roles",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "admin",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "params",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "id",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "uuid",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "204",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "401",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Unauthorized",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "403",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Forbidden",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "404",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "NotFound",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "deleteUser",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "GET",
+  },
+  {
+    "type": "PATH",
+    "value": "/users/:id/sessions",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Sessions",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "List sessions for a user",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Returns all active sessions belonging to a user.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bearer",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "scopes",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "read:users",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "params",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "id",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "uuid",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "200",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Session",
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "401",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Unauthorized",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "404",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "NotFound",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "listUserSessions",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "DELETE",
+  },
+  {
+    "type": "PATH",
+    "value": "/users/:id/sessions/:sessionId",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Sessions",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Revoke a session",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Revokes a single session of a user.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bearer",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "scopes",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "write:users",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "params",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "id",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "uuid",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "sessionId",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "DECORATOR",
+    "value": "uuid",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "204",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "401",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Unauthorized",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "404",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "NotFound",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "revokeUserSession",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "POST",
+  },
+  {
+    "type": "PATH",
+    "value": "/shapes",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Shapes",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Create a shape",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Accepts a discriminated union and echoes it back.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "public",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "true",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "body",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "shape",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Shape",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "201",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Shape",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "400",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ValidationFailed",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "createShape",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "PATH",
+    "value": "/admin",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "GET",
+  },
+  {
+    "type": "PATH",
+    "value": "/stats",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Admin",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Get server statistics",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Returns aggregate server statistics. Requires the admin role.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bearer",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "roles",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "admin",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "rateLimit",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "limit",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "30",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "window",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "1m",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "key",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "jwt",
+  },
+  {
+    "type": "DOT",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "sub",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "burst",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "5",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "headers",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "authorization",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "x-request-id",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "200",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ServerStats",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "401",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Unauthorized",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "403",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Forbidden",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "429",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "TooManyRequests",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "getStats",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "POST",
+  },
+  {
+    "type": "PATH",
+    "value": "/deny",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "tag",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Admin",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "summary",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Ban a key",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "description",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "Adds a key (JWT subject, API key or session) to the deny list. Delegates to the control plane.",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "auth",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "bearer",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "roles",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "LBRACKET",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "admin",
+  },
+  {
+    "type": "RBRACKET",
+    "value": null,
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "body",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "key",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ttl",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "string",
+  },
+  {
+    "type": "QUESTION",
+    "value": null,
+  },
+  {
+    "type": "DECORATOR",
+    "value": "example",
+  },
+  {
+    "type": "LPAREN",
+    "value": null,
+  },
+  {
+    "type": "STRING",
+    "value": "24h",
+  },
+  {
+    "type": "RPAREN",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "returns",
+  },
+  {
+    "type": "NUMBER",
+    "value": "204",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "errors",
+  },
+  {
+    "type": "LBRACE",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "400",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "ValidationFailed",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "401",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Unauthorized",
+  },
+  {
+    "type": "COMMA",
+    "value": null,
+  },
+  {
+    "type": "NUMBER",
+    "value": "403",
+  },
+  {
+    "type": "COLON",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "Forbidden",
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "WORD",
+    "value": "handler",
+  },
+  {
+    "type": "WORD",
+    "value": "denyKey",
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "RBRACE",
+    "value": null,
+  },
+  {
+    "type": "NEWLINE",
+    "value": null,
+  },
+  {
+    "type": "EOF",
+    "value": null,
+  },
+]
+`;
