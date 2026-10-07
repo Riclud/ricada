@@ -17,7 +17,9 @@
   "license": "MIT",
   "dependencies": {
     "@ricada/core": "workspace:*",
-    "@ricada/emitter-openapi": "workspace:*"
+    "@ricada/emitter-openapi": "workspace:*",
+    "@ricada/emitter-ts-common": "workspace:*",
+    "@ricada/emitter-ts-server": "workspace:*"
   },
   "peerDependencies": {
     "typescript": "^5"
