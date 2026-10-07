@@ -7,6 +7,8 @@ import { emitOpenApi } from "@ricada/emitter-openapi"
 import { emitTsServer } from "@ricada/emitter-ts-server"
 import { emitTsClient } from "@ricada/emitter-ts-client"
 import { formatReport, verifyImpl } from "./verify.ts"
+import { createMockHandler } from "./mock.ts"
+import { formatTestReport, runTests } from "./test.ts"
 
 const EMITTERS: Record<string, Emitter> = {
   openapi: { name: "openapi", emit: emitOpenApi },
@@ -17,6 +19,8 @@ const EMITTERS: Record<string, Emitter> = {
 interface Options {
   json: boolean
   impl: string | null
+  target: string | null
+  port: number | null
   file: string | null
 }
 
@@ -24,11 +28,13 @@ function parseArgs(argv: string[]): { cmd: string; opts: Options } {
   const args = [...argv]
   let cmd = "check"
   if (args[0] && !args[0].startsWith("--")) cmd = args.shift()!
-  const opts: Options = { json: false, impl: null, file: null }
+  const opts: Options = { json: false, impl: null, target: null, port: null, file: null }
   while (args.length > 0) {
     const arg = args.shift()!
     if (arg === "--json") opts.json = true
     else if (arg === "--impl") opts.impl = args.shift() ?? null
+    else if (arg === "--target") opts.target = args.shift() ?? null
+    else if (arg === "--port") opts.port = Number(args.shift())
     else if (!opts.file) opts.file = arg
   }
   return { cmd, opts }
@@ -72,7 +78,7 @@ function emitReport(report: Awaited<ReturnType<typeof verifyImpl>>, json: boolea
   return report.ok ? 0 : 1
 }
 
-export async function run(argv: string[]): Promise<number> {
+export async function run(argv: string[]): Promise<number | null> {
   const { cmd, opts } = parseArgs(argv)
   const file = opts.file ?? findContract()
   if (!file) {
@@ -102,6 +108,23 @@ export async function run(argv: string[]): Promise<number> {
     return emitReport(await verifyImpl(ir, opts.impl, out), opts.json)
   }
 
+  if (cmd === "mock") {
+    const server = Bun.serve({ port: opts.port ?? 3000, fetch: createMockHandler(ir) })
+    console.log(`ricada mock running on http://localhost:${server.port} (${ir.routes.length} routes)`)
+    return null
+  }
+
+  if (cmd === "test") {
+    if (!opts.target) {
+      console.error("test requires --target <url>")
+      return 1
+    }
+    const report = await runTests(ir, opts.target)
+    if (opts.json) console.log(JSON.stringify(report, null, 2))
+    else console.log(formatTestReport(report))
+    return report.summary.failed === 0 ? 0 : 1
+  }
+
   if (cmd === "gen") {
     const out = ir.config.out ?? "./generated"
     const targets = ir.config.targets.length > 0 ? ir.config.targets : ["openapi"]
@@ -124,6 +147,6 @@ export async function run(argv: string[]): Promise<number> {
     return 0
   }
 
-  console.error(`unknown command \`${cmd}\` (expected: check | status | gen)`)
+  console.error(`unknown command \`${cmd}\` (expected: check | status | gen | mock | test)`)
   return 1
 }

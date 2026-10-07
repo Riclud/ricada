@@ -10,6 +10,8 @@
     "start": "bun run examples/run.ts",
     "check": "bun run packages/cli/src/bin.ts check examples/basic.ricada",
     "gen": "bun run packages/cli/src/bin.ts gen examples/basic.ricada",
+    "mock": "bun run packages/cli/src/bin.ts mock examples/basic.ricada",
+    "test:api": "bun run packages/cli/src/bin.ts test examples/basic.ricada",
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
     "test": "bun test",
