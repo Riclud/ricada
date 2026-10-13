@@ -122,9 +122,9 @@ const handle = (msg: JsonRpcMessage): void => {
   }
 
   if (method === "textDocument/completion") {
-    const p = params as DocumentParams
+    const p = params as PositionParams
     const source = documents.get(p.textDocument.uri) ?? ""
-    respond(id, { isIncomplete: false, items: completions(analyze(source)) })
+    respond(id, { isIncomplete: false, items: completions(analyze(source), source, p.position) })
     return
   }
 

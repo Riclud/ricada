@@ -14,25 +14,17 @@ export interface Analysis {
   diagnostics: Diagnostic[]
 }
 
-const KEYWORDS = [
-  "import",
-  "config",
-  "type",
-  "enum",
-  "error",
-  "returns",
-  "errors",
-  "handler",
-  "body",
-  "params",
-  "query",
-  "headers",
-  "null",
-]
-
+const TOP_KEYWORDS = ["import", "config", "type", "enum", "error"]
+const ROUTE_KEYWORDS = ["body", "params", "query", "headers", "returns", "errors", "handler"]
 const METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"]
-
 const PRIMITIVES = ["string", "int", "float", "bool", "uuid", "datetime"]
+const CONFIG_KEYS = ["targets", "out", "wire", "auth", "cors", "security", "rateLimit", "control"]
+const CORS_KEYS = ["origins", "methods", "headers", "credentials", "maxAge"]
+const SECURITY_KEYS = ["headers"]
+const SECURITY_HEADER_KEYS = ["hsts", "xContentTypeOptions", "xFrameOptions", "referrerPolicy", "contentSecurityPolicy"]
+const RATE_LIMIT_KEYS = ["algorithm", "store", "default"]
+const CONTROL_KEYS = ["secret", "allow"]
+const RATE_LIMIT_KEY_VALUES = ["ip", "jwt.sub", "route", "param:", "header("]
 
 const ANNOTATIONS = [
   "@tag",
@@ -50,6 +42,15 @@ const ANNOTATIONS = [
   "@example",
   "@sensitive",
 ]
+
+const ANNOTATION_ARGS: Record<string, string[]> = {
+  auth: ["public", "scopes", "roles"],
+  rateLimit: ["limit", "window", "key", "burst"],
+  cache: ["ttl", "key"],
+  deprecated: ["reason"],
+}
+
+const KIND = { method: 2, type: 7, enum: 13, keyword: 14, property: 10, value: 12 }
 
 const toDiagnostic = (err: RicadaError): Diagnostic => {
   const start: Position = { line: Math.max(0, err.loc.line - 1), character: Math.max(0, err.loc.col - 1) }
@@ -115,22 +116,232 @@ export const wordAt = (source: string, position: Position): string => {
   return line.slice(start, end)
 }
 
-export const completions = (analysis: Analysis): CompletionItem[] => {
-  const items: CompletionItem[] = []
+const offsetAt = (source: string, position: Position): number => {
+  const lines = source.split("\n")
+  let offset = 0
 
-  for (const m of METHODS) items.push({ label: m, kind: 2, detail: "HTTP method" })
-  for (const kw of KEYWORDS) items.push({ label: kw, kind: 14, detail: "keyword" })
-  for (const p of PRIMITIVES) items.push({ label: p, kind: 7, detail: "primitive type" })
-  for (const a of ANNOTATIONS) items.push({ label: a, kind: 12, detail: "annotation" })
+  for (let i = 0; i < position.line && i < lines.length; i++) offset += lines[i]!.length + 1
 
-  if (analysis.ir) {
-    for (const t of analysis.ir.types) {
-      items.push({ label: t.name, kind: t.kind === "enum" ? 13 : 7, detail: t.kind })
+  return offset + Math.min(position.character, lines[position.line]?.length ?? 0)
+}
+
+const maskLiterals = (source: string): string => {
+  const chars = source.split("")
+  let i = 0
+
+  while (i < chars.length) {
+    const c = chars[i]!
+
+    if (c === "/" && chars[i + 1] === "/") {
+      while (i < chars.length && chars[i] !== "\n") chars[i++] = " "
+      continue
     }
-    for (const e of analysis.ir.errors) items.push({ label: e.name, kind: 7, detail: "error" })
+
+    if (c === "#") {
+      while (i < chars.length && chars[i] !== "\n") chars[i++] = " "
+      continue
+    }
+
+    if (c === '"' || c === "'") {
+      const quote = c
+      chars[i++] = " "
+
+      while (i < chars.length && chars[i] !== quote) {
+        if (chars[i] === "\\") chars[i++] = " "
+        if (i < chars.length) chars[i++] = " "
+      }
+
+      if (i < chars.length) chars[i++] = " "
+      continue
+    }
+
+    i++
   }
 
+  return chars.join("")
+}
+
+const wordBack = (text: string, index: number): string => {
+  let i = index - 1
+  while (i >= 0 && WORD_RE.test(text[i]!)) i--
+  return text.slice(i + 1, index)
+}
+
+const contextArgName = (text: string, start: number, end: number): string | null => {
+  let depth = 0
+  let colon = -1
+
+  for (let i = start; i < end; i++) {
+    const ch = text[i]!
+
+    if (ch === "(" || ch === "[" || ch === "{") depth++
+    else if (ch === ")" || ch === "]" || ch === "}") depth--
+    else if (ch === ":" && depth === 0) colon = i
+  }
+
+  if (colon === -1) return null
+  return wordBack(text, colon) || null
+}
+
+type CompletionContext =
+  | { kind: "top" }
+  | { kind: "group" }
+  | { kind: "routeBody" }
+  | { kind: "fields" }
+  | { kind: "errors" }
+  | { kind: "typeRef" }
+  | { kind: "config" }
+  | { kind: "configKeys"; keys: string[] }
+  | { kind: "annotations" }
+  | { kind: "annotationArgs"; name: string; arg: string | null }
+
+interface CursorContext {
+  context: CompletionContext
+  partial: string
+}
+
+const isRouteHeader = (header: string): boolean => METHODS.some((m) => header === m || header.startsWith(`${m} `))
+
+const classifyBlock = (header: string): CompletionContext => {
+  if (isRouteHeader(header)) return { kind: "routeBody" }
+  if (/^(body|params|query|headers)$/.test(header)) return { kind: "fields" }
+  if (header === "errors") return { kind: "errors" }
+  if (/^(type|error|enum)\b/.test(header)) return { kind: "fields" }
+  if (header === "config") return { kind: "config" }
+  if (header === "auth")
+    return { kind: "configKeys", keys: ["type", "issuer", "audience", "secret", "algorithm", "in", "name", "key"] }
+  if (header === "cors") return { kind: "configKeys", keys: CORS_KEYS }
+  if (header === "security") return { kind: "configKeys", keys: SECURITY_KEYS }
+  if (header === "headers") return { kind: "configKeys", keys: SECURITY_HEADER_KEYS }
+  if (header === "rateLimit") return { kind: "configKeys", keys: RATE_LIMIT_KEYS }
+  if (header === "default") return { kind: "configKeys", keys: ["limit", "window", "key", "burst"] }
+  if (header === "control") return { kind: "configKeys", keys: CONTROL_KEYS }
+  if (header.startsWith("/")) return { kind: "group" }
+  return { kind: "top" }
+}
+
+export const contextAt = (source: string, position: Position): CursorContext => {
+  const offset = offsetAt(source, position)
+  const masked = maskLiterals(source)
+  const text = masked.slice(0, offset)
+  const partial = wordBack(masked, offset)
+
+  if (partial.startsWith("@")) return { context: { kind: "annotations" }, partial }
+
+  const stack: Array<{ sym: "(" | "{"; index: number }> = []
+
+  for (let i = 0; i < offset; i++) {
+    const ch = text[i]!
+
+    if (ch === "(" || ch === "{") stack.push({ sym: ch, index: i })
+    else if (ch === ")" && stack[stack.length - 1]?.sym === "(") stack.pop()
+    else if (ch === "}" && stack[stack.length - 1]?.sym === "{") stack.pop()
+  }
+
+  const top = stack[stack.length - 1]
+
+  if (top?.sym === "(") {
+    const name = wordBack(masked, top.index)
+    if (name.startsWith("@")) {
+      return {
+        context: { kind: "annotationArgs", name: name.slice(1), arg: contextArgName(text, top.index + 1, offset) },
+        partial,
+      }
+    }
+    return { context: { kind: "top" }, partial }
+  }
+
+  const lineStart = masked.lastIndexOf("\n", offset - 1) + 1
+
+  if (!top) return { context: { kind: "top" }, partial }
+
+  const headerStart = masked.lastIndexOf("\n", top.index - 1) + 1
+  const header = source.slice(headerStart, top.index).trim()
+  let context = classifyBlock(header)
+
+  if (context.kind === "fields" || context.kind === "routeBody" || context.kind === "errors") {
+    const linePrefix = source.slice(lineStart, offset)
+    if (/[\w.)\]]\s*\??\s*:/.test(linePrefix) || /\|\s*[\w.]*$/.test(linePrefix)) context = { kind: "typeRef" }
+  }
+
+  return { context, partial }
+}
+
+const item = (label: string, kind: number, detail?: string): CompletionItem => ({ label, kind, detail })
+
+const keywordItems = (labels: string[]): CompletionItem[] => labels.map((l) => item(l, KIND.keyword, "keyword"))
+
+const typeItems = (analysis: Analysis): CompletionItem[] => {
+  const items = PRIMITIVES.map((p) => item(p, KIND.type, "primitive type"))
+
+  if (analysis.ir) {
+    for (const t of analysis.ir.types) items.push(item(t.name, t.kind === "enum" ? KIND.enum : KIND.type, t.kind))
+    for (const e of analysis.ir.errors) items.push(item(e.name, KIND.type, "error"))
+  }
+
+  items.push(item("null", KIND.type, "literal"))
   return items
+}
+
+const schemeItems = (analysis: Analysis): CompletionItem[] => {
+  const items: CompletionItem[] = []
+  const auth = analysis.ir?.config.auth
+
+  if (auth) for (const name of Object.keys(auth)) items.push(item(name, KIND.value, "auth scheme"))
+  items.push(item("public", KIND.value, "no auth"))
+  return items
+}
+
+const annotationArgItems = (analysis: Analysis, name: string, arg: string | null): CompletionItem[] => {
+  if (name === "auth") {
+    if (arg === "scopes" || arg === "roles") return []
+    return [...schemeItems(analysis), ...(ANNOTATION_ARGS[name] ?? []).map((a) => item(a, KIND.property, "argument"))]
+  }
+
+  if (name === "rateLimit" && arg === "key") {
+    return RATE_LIMIT_KEY_VALUES.map((v) => item(v, KIND.value, "rate-limit key"))
+  }
+
+  return (ANNOTATION_ARGS[name] ?? []).map((a) => item(a, KIND.property, "argument"))
+}
+
+const contextItems = (analysis: Analysis, context: CompletionContext): CompletionItem[] => {
+  switch (context.kind) {
+    case "top":
+      return keywordItems(TOP_KEYWORDS)
+    case "group":
+      return [...METHODS.map((m) => item(m, KIND.method, "HTTP method")), ...annotationItems()]
+    case "routeBody":
+      return [...keywordItems(ROUTE_KEYWORDS), ...annotationItems()]
+    case "errors":
+      return analysis.ir ? analysis.ir.errors.map((e) => item(e.name, KIND.type, "error")) : []
+    case "typeRef":
+      return typeItems(analysis)
+    case "config":
+      return keywordItems(CONFIG_KEYS)
+    case "configKeys":
+      return context.keys.map((k) => item(k, KIND.property, "config key"))
+    case "annotations":
+      return annotationItems()
+    case "annotationArgs":
+      return annotationArgItems(analysis, context.name, context.arg)
+    case "fields":
+      return []
+  }
+}
+
+const annotationItems = (): CompletionItem[] => ANNOTATIONS.map((a) => item(a, KIND.property, "annotation"))
+
+const applyPrefix = (items: CompletionItem[], partial: string): CompletionItem[] => {
+  if (!partial) return items
+
+  const needle = partial.toLowerCase()
+  return items.filter((i) => i.label.toLowerCase().startsWith(needle))
+}
+
+export const completions = (analysis: Analysis, source: string, position: Position): CompletionItem[] => {
+  const { context, partial } = contextAt(source, position)
+  return applyPrefix(contextItems(analysis, context), partial)
 }
 
 const typeRefText = (ref: IrTypeRef): string => `${ref.name}${ref.array ? "[]" : ""}`

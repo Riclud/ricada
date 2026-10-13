@@ -8,7 +8,10 @@ error NotFound { message: string, code: string = "NOT_FOUND" }
 /api { GET /users { returns 200: User handler listUsers } }
 `
 
-describe("lsp features", () => {
+const labelsAt = (text: string, line: number, character: number): string[] =>
+  completions(analyze(text), text, { line, character }).map((c) => c.label)
+
+describe("lsp diagnostics", () => {
   test("reports resolver diagnostics with a range", () => {
     const analysis = analyze("type T { a: Missing }")
     expect(analysis.diagnostics).toHaveLength(1)
@@ -21,34 +24,80 @@ describe("lsp features", () => {
     expect(analysis.diagnostics.length).toBeGreaterThan(0)
     expect(analysis.diagnostics[0]!.severity).toBe(1)
   })
+})
 
-  test("offers type names, primitives and annotations", () => {
-    const labels = completions(analyze(source)).map((c) => c.label)
-    expect(labels).toContain("User")
-    expect(labels).toContain("Address")
-    expect(labels).toContain("NotFound")
-    expect(labels).toContain("string")
-    expect(labels).toContain("@uuid")
-    expect(labels).toContain("GET")
+describe("lsp completion contexts", () => {
+  test("top level offers declarations only, not methods", () => {
+    const labels = labelsAt("type T { a: string }", 0, 0)
+    expect(labels).toContain("type")
+    expect(labels).toContain("config")
+    expect(labels).not.toContain("GET")
+    expect(labels).not.toContain("returns")
   })
 
+  test("route body offers route keywords and annotations", () => {
+    const text = "/api {\n  GET /users {\n    \n  }\n}\n"
+    const labels = labelsAt(text, 2, 4)
+    expect(labels).toContain("returns")
+    expect(labels).toContain("body")
+    expect(labels).toContain("handler")
+    expect(labels).toContain("@cache")
+    expect(labels).not.toContain("config")
+  })
+
+  test("type position offers primitives and literal null", () => {
+    const text = "type User {\n  id: \n}\n"
+    const labels = labelsAt(text, 1, 6)
+    expect(labels).toContain("string")
+    expect(labels).toContain("uuid")
+    expect(labels).toContain("null")
+    expect(labels).not.toContain("returns")
+  })
+
+  test("after @ offers annotations", () => {
+    const text = "type T {\n  a: string @\n}\n"
+    const labels = labelsAt(text, 1, 13)
+    expect(labels).toContain("@uuid")
+    expect(labels).toContain("@rateLimit")
+    expect(labels).not.toContain("string")
+  })
+
+  test("annotation arguments are scoped and prefixed", () => {
+    const text = "type T {\n  a: string @rateLimit(lim\n}\n"
+    const labels = labelsAt(text, 1, 26)
+    expect(labels).toEqual(["limit"])
+  })
+
+  test("auth arguments offer configured schemes", () => {
+    const withAuth = [
+      "config {",
+      '  auth { bearer { type: jwt, secret: env("S") } }',
+      "}",
+      "/api { GET /x { @auth() } }",
+      "",
+    ].join("\n")
+    const analysis = analyze(withAuth)
+    const labels = completions(analysis, withAuth, { line: 3, character: 22 }).map((c) => c.label)
+    expect(labels).toContain("bearer")
+    expect(labels).toContain("public")
+  })
+})
+
+describe("lsp hover and definition", () => {
   test("hovers a type with its fields", () => {
-    const analysis = analyze(source)
-    const value = hover(analysis, source, { line: 1, character: 6 })
+    const value = hover(analyze(source), source, { line: 1, character: 6 })
     expect(value).toContain("type **Address**")
     expect(value).toContain("city")
   })
 
   test("hovers an error type", () => {
-    const analysis = analyze(source)
-    const value = hover(analysis, source, { line: 3, character: 8 })
+    const value = hover(analyze(source), source, { line: 3, character: 8 })
     expect(value).toContain("error **NotFound**")
     expect(value).toContain("message")
   })
 
   test("goes to a type definition", () => {
-    const analysis = analyze(source)
-    const location = definition(analysis, "file:///doc.ricada", source, { line: 2, character: 40 })
+    const location = definition(analyze(source), "file:///doc.ricada", source, { line: 2, character: 40 })
     expect(location?.range.start).toEqual({ line: 1, character: 5 })
     expect(location?.uri).toBe("file:///doc.ricada")
   })
