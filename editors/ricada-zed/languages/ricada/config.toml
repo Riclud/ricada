@@ -1,0 +1,5 @@
+name = "Ricada"
+grammar = "ricada"
+path_suffixes = ["ricada", "rd"]
+line_comments = ["// ", "# "]
+tab_size = 2

@@ -1,0 +1,11 @@
+id = "ricada"
+name = "Ricada"
+version = "0.1.0"
+schema_version = 1
+authors = ["ricada"]
+description = "Ricada API contract language support (syntax highlighting, brackets, outline)"
+repository = "file:///home/user/REPOSITORIES/PUBLIC/ricada/editors/ricada-zed"
+
+[grammars.ricada]
+repository = "file:///home/user/REPOSITORIES/PUBLIC/ricada/editors/tree-sitter-ricada"
+rev = "203a0a53d467b85cd1be9de701e7ab1474ea6ec2"

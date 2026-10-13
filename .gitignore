@@ -35,3 +35,6 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # ricada codegen output
 generated
+
+editors/tree-sitter-ricada/node_modules/
+editors/ricada-zed/grammars/
