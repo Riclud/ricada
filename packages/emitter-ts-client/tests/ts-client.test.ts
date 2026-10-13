@@ -13,13 +13,15 @@ const ir = compile(readFileSync(basicPath, "utf-8"))
 const files = emitTsClient(ir)
 const byPath = Object.fromEntries(files.map((f) => [f.path, f.contents]))
 
-async function materialize(): Promise<string> {
+const materialize = async (): Promise<string> => {
   const dir = await mkdtemp(join(tmpdir(), "ricada-tsclient-"))
+
   for (const file of files) {
     const dest = join(dir, file.path)
     await mkdir(dirname(dest), { recursive: true })
     await writeFile(dest, file.contents)
   }
+
   return dir
 }
 
@@ -78,7 +80,7 @@ describe("ts-client emitter", () => {
 
   test("runtime: resolves typed responses and throws on errors", async () => {
     const dir = await materialize()
-    const mod: any = await import(join(dir, "ts-client/index.ts"))
+    const mod = await import(join(dir, "ts-client/index.ts"))
     const page = { items: [], total: 0, page: 1, size: 20 }
 
     const okClient = mod.createClient({
@@ -97,7 +99,7 @@ describe("ts-client emitter", () => {
 
   test("runtime: dev validation rejects contract violations", async () => {
     const dir = await materialize()
-    const mod: any = await import(join(dir, "ts-client/index.ts"))
+    const mod = await import(join(dir, "ts-client/index.ts"))
     const client = mod.createClient({
       baseUrl: "https://api.test",
       validate: true,
@@ -108,7 +110,7 @@ describe("ts-client emitter", () => {
 
   test("interpolates path params and serializes query", async () => {
     const dir = await materialize()
-    const mod: any = await import(join(dir, "ts-client/index.ts"))
+    const mod = await import(join(dir, "ts-client/index.ts"))
     let seen = ""
     const client = mod.createClient({
       baseUrl: "https://api.test",

@@ -30,12 +30,15 @@ export class Cursor {
   advance(n = 1): void {
     for (let i = 0; i < n; i++) {
       if (this.pos >= this.source.length) break
+
       if (this.source[this.pos] === "\n") {
         this.line++
         this.col = 1
-      } else {
-        this.col++
+        this.pos++
+        continue
       }
+
+      this.col++
       this.pos++
     }
   }

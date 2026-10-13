@@ -24,18 +24,18 @@ export interface VerifyReport {
   summary: { total: number; implemented: number; missing: number; mismatch: number }
 }
 
-function toImportPath(fromDir: string, target: string): string {
+const toImportPath = (fromDir: string, target: string): string => {
   let rel = relative(fromDir, target)
+
   if (!rel.startsWith(".")) rel = `./${rel}`
+
   rel = rel.replace(/\.(ts|tsx|mts|cts|js|mjs|cjs)$/, "")
   return rel.split(sep).join("/")
 }
 
-function routeHandler(route: IrRoute): string {
-  return handlerName(route)
-}
+const routeHandler = (route: IrRoute): string => handlerName(route)
 
-export async function verifyImpl(ir: Ir, implPath: string, outDir: string): Promise<VerifyReport> {
+export const verifyImpl = async (ir: Ir, implPath: string, outDir: string): Promise<VerifyReport> => {
   const outAbs = resolve(outDir)
   const implAbs = resolve(implPath)
 
@@ -85,16 +85,20 @@ export async function verifyImpl(ir: Ir, implPath: string, outDir: string): Prom
 
   let importError: string | null = null
   const byHandler: Record<string, string[]> = {}
+
   for (const line of output.split("\n")) {
     const match = line.match(/conformance\.ts\((\d+),\d+\): (?:error|warning) (TS\d+): (.*)$/)
     if (!match) continue
+
     const lineNo = Number(match[1])
     const code = match[2]!
     const message = match[3]!.trim()
+
     if (lineNo <= 2) {
       importError = `${code}: ${message}`
       continue
     }
+
     const name = lineMap[lineNo]
     if (name) (byHandler[name] ??= []).push(`${code}: ${message}`)
   }
@@ -102,10 +106,12 @@ export async function verifyImpl(ir: Ir, implPath: string, outDir: string): Prom
   const routes: RouteResult[] = ir.routes.map((route) => {
     const name = routeHandler(route)
     const errors = byHandler[name] ?? []
-    let status: RouteStatus = "implemented"
     const isMissing = errors.some((e) => e.startsWith("TS2339") || e.startsWith("TS7053"))
+    let status: RouteStatus = "implemented"
+
     if (importError || isMissing) status = "missing"
-    else if (errors.length > 0) status = "mismatch"
+    if (!importError && !isMissing && errors.length > 0) status = "mismatch"
+
     return { method: route.method, path: route.path, handler: name, status, errors }
   })
 
@@ -121,17 +127,21 @@ export async function verifyImpl(ir: Ir, implPath: string, outDir: string): Prom
 
 const MARK: Record<RouteStatus, string> = { implemented: "ok", missing: "MISSING", mismatch: "MISMATCH" }
 
-export function formatReport(report: VerifyReport): string {
+export const formatReport = (report: VerifyReport): string => {
   const rows = report.routes.map((r) => {
     const route = `${r.method} ${r.path}`
     return `${route.padEnd(42)} ${r.handler.padEnd(20)} ${MARK[r.status]}`
   })
+
   const header = `${"ROUTE".padEnd(42)} ${"HANDLER".padEnd(20)} STATUS`
   const lines = [header, "-".repeat(header.length), ...rows, ""]
+
   if (report.importError) lines.push(`import error: ${report.importError}`, "")
+
   lines.push(
     `summary: ${report.summary.total} routes, ${report.summary.implemented} implemented, ` +
       `${report.summary.missing} missing, ${report.summary.mismatch} mismatch`,
   )
+
   return lines.join("\n")
 }

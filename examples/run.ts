@@ -10,10 +10,11 @@ try {
   const ir = compile(text)
   console.log(JSON.stringify(ir, null, 2))
 } catch (err) {
-  if (err instanceof RicadaError) {
-    console.error(err.format(sourceLines))
-  } else {
+  if (!(err instanceof RicadaError)) {
     console.error(err)
+    process.exit(1)
   }
+
+  console.error(err.format(sourceLines))
   process.exit(1)
 }

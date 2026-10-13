@@ -5,15 +5,17 @@ export interface Registry {
   errors: Map<string, IrField[]>
 }
 
-export function buildRegistry(ir: Ir): Registry {
+export const buildRegistry = (ir: Ir): Registry => {
   const types = new Map<string, IrType>()
   for (const type of ir.types) types.set(type.name, type)
+
   const errors = new Map<string, IrField[]>()
   for (const error of ir.errors) errors.set(error.name, error.fields)
+
   return { types, errors }
 }
 
-function annotationValue(value: IrValue): unknown {
+const annotationValue = (value: IrValue): unknown => {
   switch (value.kind) {
     case "string":
       return value.value
@@ -31,7 +33,7 @@ function annotationValue(value: IrValue): unknown {
   }
 }
 
-function primitiveExample(name: string): unknown {
+const primitiveExample = (name: string): unknown => {
   switch (name) {
     case "int":
       return 0
@@ -48,8 +50,9 @@ function primitiveExample(name: string): unknown {
   }
 }
 
-export function exampleForRef(reg: Registry, ref: IrTypeRef): unknown {
+export const exampleForRef = (reg: Registry, ref: IrTypeRef): unknown => {
   if (ref.array) return [exampleForRef(reg, { ...ref, array: false })]
+
   switch (ref.kind) {
     case "primitive":
       return primitiveExample(ref.name)
@@ -62,26 +65,33 @@ export function exampleForRef(reg: Registry, ref: IrTypeRef): unknown {
   }
 }
 
-function exampleForNamed(reg: Registry, name: string): unknown {
+const exampleForNamed = (reg: Registry, name: string): unknown => {
   const error = reg.errors.get(name)
   if (error) return exampleForFields(reg, error)
+
   const type = reg.types.get(name)
+
   if (!type) return null
+
   if (type.kind === "object") return exampleForFields(reg, type.fields)
+
   if (type.kind === "enum") return type.members[0] ?? null
+
   return exampleForRef(reg, type.union[0]!)
 }
 
-export function exampleForFields(reg: Registry, fields: IrField[]): Record<string, unknown> {
+export const exampleForFields = (reg: Registry, fields: IrField[]): Record<string, unknown> => {
   const out: Record<string, unknown> = {}
+
   for (const field of fields) {
     const example = field.annotations.find((a) => a.name === "example")
     out[field.name] = example?.args[0] ? annotationValue(example.args[0].value) : exampleForRef(reg, field.type)
   }
+
   return out
 }
 
-function primitiveValid(name: string, value: unknown): boolean {
+const primitiveValid = (name: string, value: unknown): boolean => {
   switch (name) {
     case "string":
     case "uuid":
@@ -98,8 +108,9 @@ function primitiveValid(name: string, value: unknown): boolean {
   }
 }
 
-export function validateRef(reg: Registry, ref: IrTypeRef, value: unknown): boolean {
+export const validateRef = (reg: Registry, ref: IrTypeRef, value: unknown): boolean => {
   if (ref.array) return Array.isArray(value) && value.every((item) => validateRef(reg, { ...ref, array: false }, item))
+
   switch (ref.kind) {
     case "primitive":
       return primitiveValid(ref.name, value)
@@ -112,26 +123,36 @@ export function validateRef(reg: Registry, ref: IrTypeRef, value: unknown): bool
   }
 }
 
-function validateNamed(reg: Registry, name: string, value: unknown): boolean {
+const validateNamed = (reg: Registry, name: string, value: unknown): boolean => {
   const error = reg.errors.get(name)
   if (error) return validateFields(reg, error, value)
+
   const type = reg.types.get(name)
+
   if (!type) return true
+
   if (type.kind === "object") return validateFields(reg, type.fields, value)
+
   if (type.kind === "enum") return typeof value === "string" && type.members.includes(value)
+
   return type.union.some((ref) => validateRef(reg, ref, value))
 }
 
-export function validateFields(reg: Registry, fields: IrField[], value: unknown): boolean {
+export const validateFields = (reg: Registry, fields: IrField[], value: unknown): boolean => {
   if (typeof value !== "object" || value === null || Array.isArray(value)) return false
+
   const obj = value as Record<string, unknown>
+
   for (const field of fields) {
     const present = field.name in obj
+
     if (!present) {
       if (!field.optional && field.default === null) return false
       continue
     }
+
     if (!validateRef(reg, field.type, obj[field.name])) return false
   }
+
   return true
 }

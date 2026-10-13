@@ -8,27 +8,33 @@ import {
   routeOutputType,
 } from "@ricada/emitter-ts-common"
 
-function renderTypes(ir: Ir): string {
+const renderTypes = (ir: Ir): string => {
   const parts: string[] = []
+
   for (const type of ir.types) parts.push(renderTypeDecl(type))
   for (const error of ir.errors) parts.push(renderErrorDecl(error))
+
   return parts.join("\n\n") + "\n"
 }
 
-function renderContract(ir: Ir): string {
+const renderContract = (ir: Ir): string => {
   const inputs: string[] = []
   const methods: string[] = []
 
   for (const route of ir.routes) {
     const input = renderInputInterface(route, { prefix: "T." })
+
     if (input) inputs.push(input)
+
     const name = handlerName(route)
     const output = routeOutputType(route, { prefix: "T." })
+
     if (input) {
       methods.push(`  ${name}(input: ${inputTypeName(route)}): Promise<${output}> | ${output};`)
-    } else {
-      methods.push(`  ${name}(): Promise<${output}> | ${output};`)
+      continue
     }
+
+    methods.push(`  ${name}(): Promise<${output}> | ${output};`)
   }
 
   return [
@@ -49,7 +55,7 @@ function renderContract(ir: Ir): string {
   ].join("\n")
 }
 
-export function emitTsServer(ir: Ir): EmittedFile[] {
+export const emitTsServer = (ir: Ir): EmittedFile[] => {
   return [
     { path: "ts-server/types.ts", contents: renderTypes(ir) },
     { path: "ts-server/contract.ts", contents: renderContract(ir) },

@@ -10,35 +10,43 @@ import {
   routeOutputType,
 } from "@ricada/emitter-ts-common"
 
-function renderTypes(ir: Ir): string {
+const renderTypes = (ir: Ir): string => {
   const parts: string[] = []
+
   for (const type of ir.types) parts.push(renderTypeDecl(type))
   for (const error of ir.errors) parts.push(renderErrorDecl(error))
   for (const route of ir.routes) {
     const input = renderInputInterface(route, {})
     if (input) parts.push(input)
   }
+
   return parts.join("\n\n") + "\n"
 }
 
-function methodDoc(route: IrRoute): string {
+const methodDoc = (route: IrRoute): string => {
   const summary = annotationString(route.annotations.find((a) => a.name === "summary"))
   const description = annotationString(route.annotations.find((a) => a.name === "description"))
   const deprecated = route.annotations.some((a) => a.name === "deprecated")
   const doc: string[] = []
+
   if (summary) doc.push(summary)
+
   if (description && description !== summary) doc.push(description)
+
   if (deprecated) doc.push("@deprecated")
+
   if (doc.length === 0) return ""
+
   return `    /** ${doc.join(" ")} */\n`
 }
 
-function renderMethod(route: IrRoute): string {
+const renderMethod = (route: IrRoute): string => {
   const name = handlerName(route)
   const hasInput = renderInputInterface(route, {}) !== null
   const output = routeOutputType(route, { prefix: "T." })
   const arg = hasInput ? `input: T.${inputTypeName(route)}` : ""
   const passInput = hasInput ? "input" : "undefined"
+
   return (
     `${methodDoc(route)}    async ${name}(${arg}): Promise<${output}> {\n` +
     `      return request<${output}>(${JSON.stringify(route.method)}, ${JSON.stringify(route.path)}, ${passInput}, ${JSON.stringify(name)})\n` +
@@ -46,8 +54,9 @@ function renderMethod(route: IrRoute): string {
   )
 }
 
-function renderClient(ir: Ir): string {
+const renderClient = (ir: Ir): string => {
   const methods = ir.routes.map(renderMethod).join("\n\n")
+
   return `import type * as T from "./types"
 import { routeValidators } from "./validators"
 
@@ -151,7 +160,7 @@ ${methods}
 `
 }
 
-export function emitTsClient(ir: Ir): EmittedFile[] {
+export const emitTsClient = (ir: Ir): EmittedFile[] => {
   return [
     { path: "ts-client/types.ts", contents: renderTypes(ir) },
     { path: "ts-client/validators.ts", contents: renderValidators(ir) },

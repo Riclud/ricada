@@ -18,7 +18,17 @@ afterAll(() => servers.forEach((s) => s.stop()))
 describe("schema examples", () => {
   test("builds object examples using @example and defaults", () => {
     const user = reg.types.get("User") as IrObjectType
-    const example = exampleForFields(reg, user.fields) as any
+
+    interface UserExample {
+      id: string
+      name: string
+      age: number
+      role: string
+      tags: string[]
+      address: { city: string }
+    }
+
+    const example = exampleForFields(reg, user.fields) as unknown as UserExample
     expect(example.id).toBe("550e8400-e29b-41d4-a716-446655440000")
     expect(example.name).toBe("Jane Doe")
     expect(example.age).toBe(30)
@@ -46,7 +56,7 @@ describe("mock server", () => {
   test("serves success examples per route", async () => {
     const res = handler(new Request("http://mock/api/users"))
     expect(res.status).toBe(200)
-    const body: any = await res.json()
+    const body = (await res.json()) as { items: Array<{ name: string }> }
     expect(body.items).toHaveLength(1)
     expect(body.items[0].name).toBe("Jane Doe")
   })

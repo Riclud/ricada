@@ -4,20 +4,36 @@ import { fileURLToPath } from "node:url"
 import { lex } from "../src/lexer.ts"
 import { parse } from "../src/parse.ts"
 import { ParseError } from "../src/errors.ts"
-import type { Ast } from "../src/ast.ts"
+import type {
+  AliasNode,
+  Annotation,
+  Ast,
+  ConfigEntry,
+  ConfigNode,
+  EnumNode,
+  ErrorNode,
+  GroupNode,
+  ObjectTypeNode,
+  RouteNode,
+  TypeRef,
+} from "../src/ast.ts"
 
 const p = (src: string): Ast => parse(lex(src))
 
-function stripLoc(value: unknown): unknown {
+const stripLoc = (value: unknown): unknown => {
   if (Array.isArray(value)) return value.map(stripLoc)
+
   if (value && typeof value === "object") {
     const out: Record<string, unknown> = {}
+
     for (const [k, v] of Object.entries(value)) {
       if (k === "loc") continue
       out[k] = stripLoc(v)
     }
+
     return out
   }
+
   return value
 }
 
@@ -26,37 +42,41 @@ const basicPath = fileURLToPath(new URL("../../../examples/basic.ricada", import
 describe("parser v2", () => {
   test("parses an object type with annotations", () => {
     const ast = p("type T {\n  name: string @min(1) @max(100)\n}")
-    const decl = ast.declarations[0] as any
+    const decl = ast.declarations[0] as ObjectTypeNode
+
     expect(decl.kind).toBe("object")
     expect(decl.name).toBe("T")
     expect(decl.fields[0].name).toBe("name")
     expect(decl.fields[0].type).toEqual(expect.objectContaining({ name: "string", array: false, literal: false }))
-    expect(decl.fields[0].annotations.map((a: any) => a.name)).toEqual(["min", "max"])
+    expect(decl.fields[0].annotations.map((a: Annotation) => a.name)).toEqual(["min", "max"])
   })
 
   test("parses vertical (Style A) field annotations across lines", () => {
     const ast = p('type T {\n  id: string\n    @uuid\n    @example(\n      "x"\n    )\n  name: string\n}')
-    const fields = (ast.declarations[0] as any).fields
-    expect(fields[0].annotations.map((a: any) => a.name)).toEqual(["uuid", "example"])
-    expect(fields[0].annotations[1].args[0].value.value).toBe("x")
+    const fields = (ast.declarations[0] as ObjectTypeNode).fields
+
+    expect(fields[0].annotations.map((a: Annotation) => a.name)).toEqual(["uuid", "example"])
+    expect(fields[0].annotations[1].args[0].value).toEqual({ kind: "string", value: "x" })
     expect(fields[1].name).toBe("name")
     expect(fields[1].annotations).toEqual([])
   })
 
   test("parses union aliases and literal types", () => {
     const ast = p('type Id = string | int\ntype Circle { kind: "circle" }')
-    const alias = ast.declarations[0] as any
+    const alias = ast.declarations[0] as AliasNode
+    const circle = ast.declarations[1] as ObjectTypeNode
+
     expect(alias.kind).toBe("alias")
-    expect(alias.union.map((u: any) => u.name)).toEqual(["string", "int"])
-    const circle = ast.declarations[1] as any
+    expect(alias.union.map((u: TypeRef) => u.name)).toEqual(["string", "int"])
     expect(circle.fields[0].type).toEqual(expect.objectContaining({ name: "circle", literal: true }))
   })
 
   test("parses enums and errors", () => {
     const ast = p('enum Role { admin, user, guest }\nerror NotFound { message: string, code: string = "NOT_FOUND" }')
-    const e = ast.declarations[0] as any
+    const e = ast.declarations[0] as EnumNode
+    const err = ast.declarations[1] as ErrorNode
+
     expect(e).toEqual(expect.objectContaining({ kind: "enum", name: "Role", members: ["admin", "user", "guest"] }))
-    const err = ast.declarations[1] as any
     expect(err.kind).toBe("error")
     expect(err.fields[1].default).toEqual({ kind: "string", value: "NOT_FOUND" })
   })
@@ -65,10 +85,11 @@ describe("parser v2", () => {
     const ast = p(
       '/api {\n  GET /users/:id {\n    @tag("Users")\n    params { id: string @uuid }\n    returns 200: User\n    returns 204\n    errors { 404: NotFound }\n    handler getUser\n  }\n}',
     )
-    const group = ast.declarations[0] as any
+    const group = ast.declarations[0] as GroupNode
+    const route = group.items[0] as RouteNode
+
     expect(group.kind).toBe("group")
     expect(group.path).toBe("/api")
-    const route = group.items[0]
     expect(route.kind).toBe("route")
     expect(route.method).toBe("GET")
     expect(route.path).toBe("/users/:id")
@@ -79,12 +100,13 @@ describe("parser v2", () => {
     expect(route.returns[1]).toEqual(expect.objectContaining({ status: 204, type: null }))
     expect(route.errors[0]).toEqual(expect.objectContaining({ status: 404, type: "NotFound" }))
     expect(route.handler).toBe("getUser")
-    expect(route.annotations.map((a: any) => a.name)).toEqual(["tag"])
+    expect(route.annotations.map((a: Annotation) => a.name)).toEqual(["tag"])
   })
 
   test("parses config with nested blocks, arrays and calls", () => {
     const ast = p('config {\n  targets: [ts-client, docs]\n  auth { bearer { type: jwt, secret: env("X") } }\n}')
-    const cfg = ast.declarations[0] as any
+    const cfg = ast.declarations[0] as ConfigNode
+
     expect(cfg.kind).toBe("config")
     expect(cfg.entries[0]).toEqual(
       expect.objectContaining({
@@ -98,12 +120,18 @@ describe("parser v2", () => {
         },
       }),
     )
+
     const auth = cfg.entries[1]
     expect(auth.key).toBe("auth")
-    expect(auth.value.kind).toBe("object")
-    const bearer = auth.value.entries[0]
+
+    const authValue = auth.value as { kind: "object"; entries: ConfigEntry[] }
+    expect(authValue.kind).toBe("object")
+
+    const bearer = authValue.entries[0]
     expect(bearer.key).toBe("bearer")
-    const secret = bearer.value.entries.find((e: any) => e.key === "secret")
+
+    const bearerValue = bearer.value as { kind: "object"; entries: ConfigEntry[] }
+    const secret = bearerValue.entries.find((e: ConfigEntry) => e.key === "secret")!
     expect(secret.value).toEqual({ kind: "call", name: "env", args: [{ kind: "string", value: "X" }] })
   })
 

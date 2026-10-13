@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import { compile } from "../src/resolve.ts"
 import { ResolveError } from "../src/errors.ts"
-import type { IrAliasType } from "../src/ir.ts"
+import type { IrAliasType, IrField, IrObjectType } from "../src/ir.ts"
 
 const basicPath = fileURLToPath(new URL("../../../examples/basic.ricada", import.meta.url))
 
@@ -22,8 +22,8 @@ type T {
   e: null
 }
 `)
-    const t = ir.types.find((x) => x.name === "T") as any
-    expect(t.fields.map((f: any) => f.type.kind)).toEqual(["primitive", "named", "literal", "named", "null"])
+    const t = ir.types.find((x) => x.name === "T") as IrObjectType
+    expect(t.fields.map((f: IrField) => f.type.kind)).toEqual(["primitive", "named", "literal", "named", "null"])
     expect(t.fields[3].type.array).toBe(true)
   })
 

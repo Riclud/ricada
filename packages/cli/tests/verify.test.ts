@@ -24,7 +24,7 @@ const ALL_AS_ANY = `export const handlers = {
 }
 `
 
-async function withImpl(source: string, name = "handlers.ts") {
+const withImpl = async (source: string, name = "handlers.ts") => {
   const dir = await mkdtemp(join(tmpdir(), "ricada-verify-"))
   const impl = join(dir, name)
   await writeFile(impl, source, "utf-8")

@@ -20,45 +20,53 @@ export interface TestReport {
   summary: { total: number; passed: number; failed: number }
 }
 
-function buildPath(reg: Registry, route: IrRoute): string {
+const buildPath = (reg: Registry, route: IrRoute): string => {
   let path = route.path
   const params = route.params.find((p) => p.in === "params")
+
   if (params) {
     for (const field of params.fields) {
       path = path.replace(`:${field.name}`, encodeURIComponent(String(exampleForRef(reg, field.type))))
     }
   }
+
   return path
 }
 
-function buildQuery(reg: Registry, route: IrRoute): string {
+const buildQuery = (reg: Registry, route: IrRoute): string => {
   const query = route.params.find((p) => p.in === "query")
+
   if (!query) return ""
+
   const parts: string[] = []
+
   for (const field of query.fields) {
     const value = exampleForRef(reg, field.type)
     parts.push(`${encodeURIComponent(field.name)}=${encodeURIComponent(String(value))}`)
   }
+
   return parts.length > 0 ? `?${parts.join("&")}` : ""
 }
 
-function buildHeaders(reg: Registry, route: IrRoute): Record<string, string> {
+const buildHeaders = (reg: Registry, route: IrRoute): Record<string, string> => {
   const headers: Record<string, string> = {}
   const block = route.params.find((p) => p.in === "headers")
+
   if (block) {
     for (const field of block.fields) {
       headers[field.name] = String(exampleForRef(reg, field.type))
     }
   }
+
   return headers
 }
 
-function buildBody(reg: Registry, route: IrRoute): unknown {
+const buildBody = (reg: Registry, route: IrRoute): unknown => {
   const body = route.params.find((p) => p.in === "body")
   return body ? exampleForFields(reg, body.fields) : undefined
 }
 
-export async function runTests(ir: Ir, target: string): Promise<TestReport> {
+export const runTests = async (ir: Ir, target: string): Promise<TestReport> => {
   const reg = buildRegistry(ir)
   const results: TestResult[] = []
 
@@ -73,12 +81,15 @@ export async function runTests(ir: Ir, target: string): Promise<TestReport> {
     for (const e of route.errors) statuses.add(e.status)
 
     let response: Response
+
     try {
       const init: RequestInit = { method: route.method, headers }
+
       if (body !== undefined) {
         headers["content-type"] = "application/json"
         init.body = JSON.stringify(body)
       }
+
       response = await fetch(url, init)
     } catch (err) {
       results.push({
@@ -96,6 +107,7 @@ export async function runTests(ir: Ir, target: string): Promise<TestReport> {
 
     const text = await response.text()
     let data: unknown = undefined
+
     try {
       data = text ? JSON.parse(text) : undefined
     } catch {
@@ -107,6 +119,7 @@ export async function runTests(ir: Ir, target: string): Promise<TestReport> {
       route.returns.find(
         (r) => (r.status === null || (r.status >= 200 && r.status < 300)) && (r.status ?? 200) === response.status,
       ) ?? route.returns.find((r) => r.status === null || (r.status >= 200 && r.status < 300))
+
     const bodyValid = success?.type ? validateRef(reg, success.type, data) : true
     const pass = declared && bodyValid
 
@@ -133,13 +146,15 @@ export async function runTests(ir: Ir, target: string): Promise<TestReport> {
   }
 }
 
-export function formatTestReport(report: TestReport): string {
+export const formatTestReport = (report: TestReport): string => {
   const header = `${"ROUTE".padEnd(42)} ${"HANDLER".padEnd(20)} STATUS RESULT`
+
   const rows = report.results.map((r) => {
     const route = `${r.method} ${r.path}`
     const status = (r.status === null ? "-" : String(r.status)).padEnd(6)
     return `${route.padEnd(42)} ${r.handler.padEnd(20)} ${status} ${r.pass ? "PASS" : `FAIL (${r.detail})`}`
   })
+
   return [
     header,
     "-".repeat(header.length),

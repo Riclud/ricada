@@ -24,46 +24,71 @@ interface Options {
   file: string | null
 }
 
-function parseArgs(argv: string[]): { cmd: string; opts: Options } {
+const parseArgs = (argv: string[]): { cmd: string; opts: Options } => {
   const args = [...argv]
   let cmd = "check"
+
   if (args[0] && !args[0].startsWith("--")) cmd = args.shift()!
+
   const opts: Options = { json: false, impl: null, target: null, port: null, file: null }
+
   while (args.length > 0) {
     const arg = args.shift()!
-    if (arg === "--json") opts.json = true
-    else if (arg === "--impl") opts.impl = args.shift() ?? null
-    else if (arg === "--target") opts.target = args.shift() ?? null
-    else if (arg === "--port") opts.port = Number(args.shift())
-    else if (!opts.file) opts.file = arg
+
+    if (arg === "--json") {
+      opts.json = true
+      continue
+    }
+
+    if (arg === "--impl") {
+      opts.impl = args.shift() ?? null
+      continue
+    }
+
+    if (arg === "--target") {
+      opts.target = args.shift() ?? null
+      continue
+    }
+
+    if (arg === "--port") {
+      opts.port = Number(args.shift())
+      continue
+    }
+
+    if (!opts.file) opts.file = arg
   }
+
   return { cmd, opts }
 }
 
-function findContract(): string | null {
+const findContract = (): string | null => {
   for (const name of ["api.ricada", "main.ricada", "ricada.ricada", "ricada.rd", "api.rd"]) {
     if (existsSync(name)) return name
   }
-  const any = readdirSync(".").find((f) => f.endsWith(".ricada") || f.endsWith(".rd"))
-  return any ?? null
+
+  const found = readdirSync(".").find((f) => f.endsWith(".ricada") || f.endsWith(".rd"))
+  return found ?? null
 }
 
-function printError(err: unknown, source: string): void {
-  if (err instanceof RicadaError) {
-    console.error(err.format(source.split("\n")))
-  } else {
+const printError = (err: unknown, source: string): void => {
+  if (!(err instanceof RicadaError)) {
     console.error(err)
+    return
   }
+
+  console.error(err.format(source.split("\n")))
 }
 
-async function compileFile(file: string): Promise<{ ir: Ir; source: string } | null> {
+const compileFile = async (file: string): Promise<{ ir: Ir; source: string } | null> => {
   let source: string
+
   try {
     source = await readFile(file, "utf-8")
   } catch {
     console.error(`cannot read ${file}`)
     return null
   }
+
   try {
     return { ir: compile(source), source }
   } catch (err) {
@@ -72,22 +97,24 @@ async function compileFile(file: string): Promise<{ ir: Ir; source: string } | n
   }
 }
 
-function emitReport(report: Awaited<ReturnType<typeof verifyImpl>>, json: boolean): number {
-  if (json) console.log(JSON.stringify(report, null, 2))
-  else console.log(formatReport(report))
+const emitReport = (report: Awaited<ReturnType<typeof verifyImpl>>, json: boolean): number => {
+  console.log(json ? JSON.stringify(report, null, 2) : formatReport(report))
   return report.ok ? 0 : 1
 }
 
-export async function run(argv: string[]): Promise<number | null> {
+export const run = async (argv: string[]): Promise<number | null> => {
   const { cmd, opts } = parseArgs(argv)
   const file = opts.file ?? findContract()
+
   if (!file) {
     console.error("no contract file found (expected api.ricada or ricada.rd)")
     return 1
   }
 
   const compiled = await compileFile(file)
+
   if (!compiled) return 1
+
   const { ir } = compiled
 
   if (cmd === "check") {
@@ -95,6 +122,7 @@ export async function run(argv: string[]): Promise<number | null> {
       console.log(`ok: ${file} is valid`)
       return 0
     }
+
     const out = ir.config.out ?? "./generated"
     return emitReport(await verifyImpl(ir, opts.impl, out), opts.json)
   }
@@ -104,6 +132,7 @@ export async function run(argv: string[]): Promise<number | null> {
       console.error("status requires --impl <file>")
       return 1
     }
+
     const out = ir.config.out ?? "./generated"
     return emitReport(await verifyImpl(ir, opts.impl, out), opts.json)
   }
@@ -119,9 +148,9 @@ export async function run(argv: string[]): Promise<number | null> {
       console.error("test requires --target <url>")
       return 1
     }
+
     const report = await runTests(ir, opts.target)
-    if (opts.json) console.log(JSON.stringify(report, null, 2))
-    else console.log(formatTestReport(report))
+    console.log(opts.json ? JSON.stringify(report, null, 2) : formatTestReport(report))
     return report.summary.failed === 0 ? 0 : 1
   }
 
@@ -129,12 +158,15 @@ export async function run(argv: string[]): Promise<number | null> {
     const out = ir.config.out ?? "./generated"
     const targets = ir.config.targets.length > 0 ? ir.config.targets : ["openapi"]
     let emitted = 0
+
     for (const target of targets) {
       const emitter = EMITTERS[target]
+
       if (!emitter) {
         console.warn(`skip: no emitter for target \`${target}\``)
         continue
       }
+
       for (const outFile of emitter.emit(ir)) {
         const dest = pathResolve(out, outFile.path)
         await mkdir(dirname(dest), { recursive: true })
@@ -143,6 +175,7 @@ export async function run(argv: string[]): Promise<number | null> {
         emitted++
       }
     }
+
     console.log(`generated ${emitted} file(s) into ${out}`)
     return 0
   }
