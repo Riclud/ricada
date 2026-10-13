@@ -28,8 +28,6 @@ export const parse = (tokens: Token[]): Ast => {
 
   const at = (type: TokenType): boolean => peek().type === type
 
-  const atWord = (value: string): boolean => peek().type === "WORD" && peek().value === value
-
   const consume = (expected?: TokenType): Token => {
     const t = peek()
 

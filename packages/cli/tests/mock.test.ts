@@ -1,6 +1,5 @@
 import { afterAll, describe, expect, test } from "bun:test"
 import { readFileSync } from "node:fs"
-import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { compile } from "@ricada/core"
 import { buildRegistry, exampleForFields, exampleForRef } from "../src/schema.ts"

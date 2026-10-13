@@ -32,7 +32,6 @@ import type {
   IrType,
   IrTypeRef,
   IrValue,
-  TypeRefKind,
 } from "./ir.ts"
 import type { Location } from "./tokens.ts"
 
