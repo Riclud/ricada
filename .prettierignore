@@ -3,3 +3,6 @@ bun.lock
 generated
 dist
 coverage
+editors/tree-sitter-ricada
+editors/ricada-zed/grammars
+editors/ricada-zed/target

@@ -1,7 +1,20 @@
 import tseslint from "typescript-eslint"
 
 export default tseslint.config(
-  { ignores: ["node_modules/", "generated/", "dist/", "coverage/", ".git/", "bun.lock", "*.snap"] },
+  {
+    ignores: [
+      "node_modules/",
+      "generated/",
+      "dist/",
+      "coverage/",
+      ".git/",
+      "bun.lock",
+      "*.snap",
+      "editors/tree-sitter-ricada/",
+      "editors/ricada-zed/grammars/",
+      "editors/ricada-zed/target/",
+    ],
+  },
   ...tseslint.configs.recommended,
   {
     rules: {

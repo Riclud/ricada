@@ -9,3 +9,7 @@ repository = "file:///home/user/REPOSITORIES/PUBLIC/ricada/editors/ricada-zed"
 [grammars.ricada]
 repository = "file:///home/user/REPOSITORIES/PUBLIC/ricada/editors/tree-sitter-ricada"
 rev = "203a0a53d467b85cd1be9de701e7ab1474ea6ec2"
+
+[language_servers.ricada-lsp]
+name = "Ricada LSP"
+languages = ["Ricada"]

@@ -38,3 +38,5 @@ generated
 
 editors/tree-sitter-ricada/node_modules/
 editors/ricada-zed/grammars/
+editors/ricada-zed/target/
+editors/ricada-zed/extension.wasm
