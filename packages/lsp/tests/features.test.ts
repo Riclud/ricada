@@ -54,12 +54,31 @@ describe("lsp completion contexts", () => {
     expect(labels).not.toContain("returns")
   })
 
-  test("after @ offers annotations", () => {
+  test("string field annotations are string-oriented", () => {
     const text = "type T {\n  a: string @\n}\n"
     const labels = labelsAt(text, 1, 13)
     expect(labels).toContain("@uuid")
+    expect(labels).toContain("@email")
+    expect(labels).toContain("@min")
+    expect(labels).not.toContain("@rateLimit")
+    expect(labels).not.toContain("@tag")
+  })
+
+  test("numeric field annotations drop string ones", () => {
+    const text = "type T {\n  n: int @\n}\n"
+    const labels = labelsAt(text, 1, 10)
+    expect(labels).toContain("@min")
+    expect(labels).toContain("@max")
+    expect(labels).not.toContain("@email")
+    expect(labels).not.toContain("@regex")
+  })
+
+  test("route annotations apply inside a route body", () => {
+    const text = "/api {\n  GET /x {\n    @\n  }\n}\n"
+    const labels = labelsAt(text, 2, 5)
     expect(labels).toContain("@rateLimit")
-    expect(labels).not.toContain("string")
+    expect(labels).toContain("@tag")
+    expect(labels).not.toContain("@email")
   })
 
   test("annotation arguments are scoped and prefixed", () => {

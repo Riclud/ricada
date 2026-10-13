@@ -26,22 +26,24 @@ const RATE_LIMIT_KEYS = ["algorithm", "store", "default"]
 const CONTROL_KEYS = ["secret", "allow"]
 const RATE_LIMIT_KEY_VALUES = ["ip", "jwt.sub", "route", "param:", "header("]
 
-const ANNOTATIONS = [
-  "@tag",
-  "@summary",
-  "@description",
-  "@auth",
-  "@rateLimit",
-  "@cache",
-  "@deprecated",
+const STRING_ANNOTATIONS = [
   "@min",
   "@max",
   "@email",
   "@regex",
   "@uuid",
   "@example",
+  "@description",
   "@sensitive",
+  "@toUpperCase",
+  "@toLowerCase",
 ]
+
+const NUMBER_ANNOTATIONS = ["@min", "@max", "@example", "@description"]
+
+const GENERIC_ANNOTATIONS = ["@example", "@description", "@sensitive"]
+
+const ROUTE_ANNOTATIONS = ["@tag", "@summary", "@description", "@auth", "@rateLimit", "@cache", "@deprecated"]
 
 const ANNOTATION_ARGS: Record<string, string[]> = {
   auth: ["public", "scopes", "roles"],
@@ -49,6 +51,9 @@ const ANNOTATION_ARGS: Record<string, string[]> = {
   cache: ["ttl", "key"],
   deprecated: ["reason"],
 }
+
+const STRING_TYPES = new Set(["string", "uuid", "datetime"])
+const NUMBER_TYPES = new Set(["int", "float"])
 
 const KIND = { method: 2, type: 7, enum: 13, keyword: 14, property: 10, value: 12 }
 
@@ -183,6 +188,24 @@ const contextArgName = (text: string, start: number, end: number): string | null
   return wordBack(text, colon) || null
 }
 
+const declaredTypeAt = (source: string, position: Position): string | null => {
+  const lines = source.split("\n")
+  const candidates: string[] = [(lines[position.line] ?? "").slice(0, position.character)]
+
+  for (let i = position.line - 1; i >= 0 && candidates.length < 6; i--) {
+    const line = lines[i] ?? ""
+    candidates.push(line)
+    if (line.includes("{") || line.includes("}")) break
+  }
+
+  for (const line of candidates) {
+    const match = /:\s*([A-Za-z_][\w.]*)/.exec(line)
+    if (match) return match[1] ?? null
+  }
+
+  return null
+}
+
 type CompletionContext =
   | { kind: "top" }
   | { kind: "group" }
@@ -192,7 +215,7 @@ type CompletionContext =
   | { kind: "typeRef" }
   | { kind: "config" }
   | { kind: "configKeys"; keys: string[] }
-  | { kind: "annotations" }
+  | { kind: "annotations"; scope: "field" | "route"; fieldType: string | null }
   | { kind: "annotationArgs"; name: string; arg: string | null }
 
 interface CursorContext {
@@ -202,14 +225,15 @@ interface CursorContext {
 
 const isRouteHeader = (header: string): boolean => METHODS.some((m) => header === m || header.startsWith(`${m} `))
 
-const classifyBlock = (header: string): CompletionContext => {
+const blockContext = (header: string): CompletionContext => {
   if (isRouteHeader(header)) return { kind: "routeBody" }
   if (/^(body|params|query|headers)$/.test(header)) return { kind: "fields" }
   if (header === "errors") return { kind: "errors" }
   if (/^(type|error|enum)\b/.test(header)) return { kind: "fields" }
   if (header === "config") return { kind: "config" }
-  if (header === "auth")
+  if (header === "auth") {
     return { kind: "configKeys", keys: ["type", "issuer", "audience", "secret", "algorithm", "in", "name", "key"] }
+  }
   if (header === "cors") return { kind: "configKeys", keys: CORS_KEYS }
   if (header === "security") return { kind: "configKeys", keys: SECURITY_KEYS }
   if (header === "headers") return { kind: "configKeys", keys: SECURITY_HEADER_KEYS }
@@ -220,13 +244,13 @@ const classifyBlock = (header: string): CompletionContext => {
   return { kind: "top" }
 }
 
+const isRouteScope = (context: CompletionContext): boolean => context.kind === "routeBody" || context.kind === "group"
+
 export const contextAt = (source: string, position: Position): CursorContext => {
   const offset = offsetAt(source, position)
   const masked = maskLiterals(source)
   const text = masked.slice(0, offset)
   const partial = wordBack(masked, offset)
-
-  if (partial.startsWith("@")) return { context: { kind: "annotations" }, partial }
 
   const stack: Array<{ sym: "(" | "{"; index: number }> = []
 
@@ -242,24 +266,31 @@ export const contextAt = (source: string, position: Position): CursorContext => 
 
   if (top?.sym === "(") {
     const name = wordBack(masked, top.index)
+
     if (name.startsWith("@")) {
-      return {
-        context: { kind: "annotationArgs", name: name.slice(1), arg: contextArgName(text, top.index + 1, offset) },
-        partial,
-      }
+      const arg = contextArgName(text, top.index + 1, offset)
+      return { context: { kind: "annotationArgs", name: name.slice(1), arg }, partial }
     }
+
     return { context: { kind: "top" }, partial }
   }
 
-  const lineStart = masked.lastIndexOf("\n", offset - 1) + 1
+  const enclosing = top
+    ? blockContext(source.slice(masked.lastIndexOf("\n", top.index - 1) + 1, top.index).trim())
+    : { kind: "top" as const }
+
+  if (partial.startsWith("@")) {
+    const scope = isRouteScope(enclosing) ? "route" : "field"
+    const fieldType = scope === "field" ? declaredTypeAt(source, position) : null
+    return { context: { kind: "annotations", scope, fieldType }, partial }
+  }
 
   if (!top) return { context: { kind: "top" }, partial }
 
-  const headerStart = masked.lastIndexOf("\n", top.index - 1) + 1
-  const header = source.slice(headerStart, top.index).trim()
-  let context = classifyBlock(header)
+  let context = enclosing
 
   if (context.kind === "fields" || context.kind === "routeBody" || context.kind === "errors") {
+    const lineStart = masked.lastIndexOf("\n", offset - 1) + 1
     const linePrefix = source.slice(lineStart, offset)
     if (/[\w.)\]]\s*\??\s*:/.test(linePrefix) || /\|\s*[\w.]*$/.test(linePrefix)) context = { kind: "typeRef" }
   }
@@ -288,9 +319,21 @@ const schemeItems = (analysis: Analysis): CompletionItem[] => {
   const auth = analysis.ir?.config.auth
 
   if (auth) for (const name of Object.keys(auth)) items.push(item(name, KIND.value, "auth scheme"))
+
   items.push(item("public", KIND.value, "no auth"))
   return items
 }
+
+const fieldAnnotations = (analysis: Analysis, fieldType: string | null): CompletionItem[] => {
+  let names = GENERIC_ANNOTATIONS
+
+  if (fieldType && STRING_TYPES.has(fieldType)) names = STRING_ANNOTATIONS
+  else if (fieldType && NUMBER_TYPES.has(fieldType)) names = NUMBER_ANNOTATIONS
+
+  return names.map((n) => item(n, KIND.property, "annotation"))
+}
+
+const annotationItems = (names: string[]): CompletionItem[] => names.map((n) => item(n, KIND.property, "annotation"))
 
 const annotationArgItems = (analysis: Analysis, name: string, arg: string | null): CompletionItem[] => {
   if (name === "auth") {
@@ -310,9 +353,9 @@ const contextItems = (analysis: Analysis, context: CompletionContext): Completio
     case "top":
       return keywordItems(TOP_KEYWORDS)
     case "group":
-      return [...METHODS.map((m) => item(m, KIND.method, "HTTP method")), ...annotationItems()]
+      return [...METHODS.map((m) => item(m, KIND.method, "HTTP method")), ...annotationItems(ROUTE_ANNOTATIONS)]
     case "routeBody":
-      return [...keywordItems(ROUTE_KEYWORDS), ...annotationItems()]
+      return [...keywordItems(ROUTE_KEYWORDS), ...annotationItems(ROUTE_ANNOTATIONS)]
     case "errors":
       return analysis.ir ? analysis.ir.errors.map((e) => item(e.name, KIND.type, "error")) : []
     case "typeRef":
@@ -322,15 +365,15 @@ const contextItems = (analysis: Analysis, context: CompletionContext): Completio
     case "configKeys":
       return context.keys.map((k) => item(k, KIND.property, "config key"))
     case "annotations":
-      return annotationItems()
+      return context.scope === "route"
+        ? annotationItems(ROUTE_ANNOTATIONS)
+        : fieldAnnotations(analysis, context.fieldType)
     case "annotationArgs":
       return annotationArgItems(analysis, context.name, context.arg)
     case "fields":
       return []
   }
 }
-
-const annotationItems = (): CompletionItem[] => ANNOTATIONS.map((a) => item(a, KIND.property, "annotation"))
 
 const applyPrefix = (items: CompletionItem[], partial: string): CompletionItem[] => {
   if (!partial) return items
