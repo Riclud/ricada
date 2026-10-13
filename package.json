@@ -25,7 +25,8 @@
     "@ricada/emitter-openapi": "workspace:*",
     "@ricada/emitter-ts-client": "workspace:*",
     "@ricada/emitter-ts-common": "workspace:*",
-    "@ricada/emitter-ts-server": "workspace:*"
+    "@ricada/emitter-ts-server": "workspace:*",
+    "@ricada/runtime": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "latest",
