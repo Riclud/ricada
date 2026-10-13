@@ -1,5 +1,5 @@
-import { readFileSync } from "node:fs"
-import { dirname, join } from "node:path"
+import { readFileSync } from "fs"
+import { dirname, join } from "path"
 import { ImportError } from "./errors.ts"
 import { lex } from "./lexer.ts"
 import { parse } from "./parse.ts"

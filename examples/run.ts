@@ -1,6 +1,6 @@
-import { fileURLToPath } from "node:url"
-import { dirname } from "node:path"
-import fs from "node:fs/promises"
+import { fileURLToPath } from "url"
+import { dirname } from "path"
+import fs from "fs/promises"
 import { compile, RicadaError } from "@ricada/core"
 
 const file = fileURLToPath(new URL("./basic.ricada", import.meta.url))

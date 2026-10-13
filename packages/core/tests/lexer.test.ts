@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import { readFileSync } from "node:fs"
-import { fileURLToPath } from "node:url"
+import { readFileSync } from "fs"
+import { fileURLToPath } from "url"
 import { lex } from "../src/lexer.ts"
 import { LexError } from "../src/errors.ts"
 import type { Token } from "../src/tokens.ts"

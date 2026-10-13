@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test"
-import { mkdtemp, writeFile } from "node:fs/promises"
-import { tmpdir } from "node:os"
-import { join } from "node:path"
-import { fileURLToPath } from "node:url"
+import { mkdtemp, writeFile } from "fs/promises"
+import { tmpdir } from "os"
+import { join } from "path"
+import { fileURLToPath } from "url"
 import { run } from "../src/index.ts"
 
 const basicPath = fileURLToPath(new URL("../../../examples/basic.ricada", import.meta.url))

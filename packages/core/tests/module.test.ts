@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
-import { mkdtemp } from "node:fs/promises"
-import { tmpdir } from "node:os"
-import { join } from "node:path"
+import { mkdtemp } from "fs/promises"
+import { tmpdir } from "os"
+import { join } from "path"
 import { compile, ImportError, lex, loadImports, parse } from "../src/index.ts"
 
 const fixture = async (files: Record<string, string>): Promise<{ dir: string; read: (p: string) => string }> => {
