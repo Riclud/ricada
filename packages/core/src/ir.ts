@@ -15,10 +15,60 @@ export type IrValue =
   | { kind: "object"; entries: Record<string, IrValue> }
   | { kind: "call"; name: string; args: IrValue[] }
 
+export interface IrConfigAuthScheme {
+  type: string
+  issuer: string | null
+  audience: string | null
+  key: string | null
+  name: string | null
+  algorithm: string | null
+  location: string | null
+  secret: IrValue | null
+}
+
+export interface IrConfigCors {
+  origins: string[]
+  methods: string[]
+  headers: string[]
+  credentials: boolean
+  maxAge: string | null
+}
+
+export interface IrConfigSecurityHeaders {
+  hsts: boolean
+  xContentTypeOptions: string | null
+  xFrameOptions: string | null
+  referrerPolicy: string | null
+  contentSecurityPolicy: string | null
+}
+
+export interface IrConfigRateLimitDefault {
+  limit: number | null
+  window: string | null
+  key: string | null
+  burst: number | null
+}
+
+export interface IrConfigRateLimit {
+  algorithm: string | null
+  store: string | null
+  default: IrConfigRateLimitDefault | null
+}
+
+export interface IrConfigControl {
+  secret: IrValue | null
+  allow: string[]
+}
+
 export interface IrConfig {
   targets: string[]
   out: string | null
   wire: string | null
+  auth: Record<string, IrConfigAuthScheme> | null
+  cors: IrConfigCors | null
+  security: IrConfigSecurityHeaders | null
+  rateLimit: IrConfigRateLimit | null
+  control: IrConfigControl | null
   raw: IrValue
 }
 

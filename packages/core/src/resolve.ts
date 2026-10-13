@@ -23,6 +23,11 @@ import type {
   IrAliasType,
   IrAnnotation,
   IrConfig,
+  IrConfigAuthScheme,
+  IrConfigControl,
+  IrConfigCors,
+  IrConfigRateLimit,
+  IrConfigSecurityHeaders,
   IrEnumType,
   IrError,
   IrErrorRef,
@@ -208,6 +213,108 @@ export const resolve = (ast: Ast): Ir => {
   const configObj = rawConfig.kind === "object" ? rawConfig.entries : {}
   const targetsValue = configObj["targets"]
 
+  type ConfigObj = Record<string, IrValue>
+
+  const asObject = (v: IrValue | undefined): ConfigObj | null =>
+    v !== undefined && v.kind === "object" ? v.entries : null
+
+  const asText = (v: IrValue | undefined): string | null => {
+    if (!v) return null
+
+    if (v.kind === "string" || v.kind === "word" || v.kind === "number") return v.value
+
+    return null
+  }
+
+  const asNumber = (v: IrValue | undefined): number | null => {
+    if (v && v.kind === "number") return Number(v.value)
+
+    return null
+  }
+
+  const asBool = (v: IrValue | undefined): boolean => v?.kind === "word" && v.value === "true"
+
+  const asTextArray = (v: IrValue | undefined): string[] => {
+    if (!v || v.kind !== "array") return []
+
+    const out: string[] = []
+
+    for (const item of v.items) {
+      const t = asText(item)
+      if (t !== null) out.push(t)
+    }
+
+    return out
+  }
+
+  const authObj = asObject(configObj["auth"])
+  const auth: Record<string, IrConfigAuthScheme> | null = authObj ? {} : null
+
+  if (authObj && auth) {
+    for (const [name, schemeValue] of Object.entries(authObj)) {
+      const scheme = asObject(schemeValue) ?? {}
+
+      auth[name] = {
+        type: asText(scheme["type"]) ?? "unknown",
+        issuer: asText(scheme["issuer"]),
+        audience: asText(scheme["audience"]),
+        key: asText(scheme["key"]),
+        name: asText(scheme["name"]),
+        algorithm: asText(scheme["algorithm"]),
+        location: asText(scheme["in"]),
+        secret: scheme["secret"] ?? null,
+      }
+    }
+  }
+
+  const corsObj = asObject(configObj["cors"])
+  const cors: IrConfigCors | null = corsObj
+    ? {
+        origins: asTextArray(corsObj["origins"]),
+        methods: asTextArray(corsObj["methods"]),
+        headers: asTextArray(corsObj["headers"]),
+        credentials: asBool(corsObj["credentials"]),
+        maxAge: asText(corsObj["maxAge"]),
+      }
+    : null
+
+  const securityObj = asObject(configObj["security"])
+  const securityHeadersObj = asObject(securityObj?.["headers"])
+  const security: IrConfigSecurityHeaders | null = securityHeadersObj
+    ? {
+        hsts: asBool(securityHeadersObj["hsts"]),
+        xContentTypeOptions: asText(securityHeadersObj["xContentTypeOptions"]),
+        xFrameOptions: asText(securityHeadersObj["xFrameOptions"]),
+        referrerPolicy: asText(securityHeadersObj["referrerPolicy"]),
+        contentSecurityPolicy: asText(securityHeadersObj["contentSecurityPolicy"]),
+      }
+    : null
+
+  const rateLimitObj = asObject(configObj["rateLimit"])
+  const rateLimitDefaultObj = asObject(rateLimitObj?.["default"])
+  const rateLimit: IrConfigRateLimit | null = rateLimitObj
+    ? {
+        algorithm: asText(rateLimitObj["algorithm"]),
+        store: asText(rateLimitObj["store"]),
+        default: rateLimitDefaultObj
+          ? {
+              limit: asNumber(rateLimitDefaultObj["limit"]),
+              window: asText(rateLimitDefaultObj["window"]),
+              key: asText(rateLimitDefaultObj["key"]),
+              burst: asNumber(rateLimitDefaultObj["burst"]),
+            }
+          : null,
+      }
+    : null
+
+  const controlObj = asObject(configObj["control"])
+  const control: IrConfigControl | null = controlObj
+    ? {
+        secret: controlObj["secret"] ?? null,
+        allow: asTextArray(controlObj["allow"]),
+      }
+    : null
+
   const config: IrConfig = {
     targets:
       targetsValue && targetsValue.kind === "array"
@@ -218,6 +325,11 @@ export const resolve = (ast: Ast): Ir => {
       configObj["wire"]?.kind === "word" || configObj["wire"]?.kind === "string"
         ? (configObj["wire"] as { value: string }).value
         : null,
+    auth,
+    cors,
+    security,
+    rateLimit,
+    control,
     raw: rawConfig,
   }
 

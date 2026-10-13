@@ -74,6 +74,38 @@ type Shape = Circle | Square
     expect(ir.config.wire).toBe("json")
   })
 
+  test("extracts typed auth, cors, security, rateLimit and control config", () => {
+    const ir = compile(`
+config {
+  auth {
+    bearer { type: jwt, issuer: env("HOST"), secret: env("S"), algorithm: HS256 }
+    apiKey { type: apiKey, in: header, name: "X-Key", key: env("K") }
+  }
+  cors { origins: [env("ORIGIN")], methods: [GET, POST], headers: ["Authorization"], credentials: true, maxAge: "1h" }
+  security { headers { hsts: true, xFrameOptions: DENY, referrerPolicy: "no-referrer" } }
+  rateLimit { algorithm: tokenBucket, store: memory, default { limit: 1000, window: "1m", key: ip, burst: 50 } }
+  control { secret: env("CTL"), allow: [rateLimit, deny] }
+}
+`)
+
+    expect(ir.config.auth).toEqual({
+      bearer: expect.objectContaining({ type: "jwt", issuer: null, algorithm: "HS256" }),
+      apiKey: expect.objectContaining({ type: "apiKey", location: "header", name: "X-Key" }),
+    })
+    expect(ir.config.cors).toEqual(
+      expect.objectContaining({
+        origins: [],
+        methods: ["GET", "POST"],
+        credentials: true,
+        maxAge: "1h",
+      }),
+    )
+    expect(ir.config.security).toEqual(expect.objectContaining({ hsts: true, xFrameOptions: "DENY" }))
+    expect(ir.config.rateLimit).toEqual(expect.objectContaining({ algorithm: "tokenBucket", store: "memory" }))
+    expect(ir.config.rateLimit!.default).toEqual({ limit: 1000, window: "1m", key: "ip", burst: 50 })
+    expect(ir.config.control).toEqual({ secret: expect.any(Object), allow: ["rateLimit", "deny"] })
+  })
+
   test("resolves the reference example without errors", () => {
     const source = readFileSync(basicPath, "utf-8")
     expect(() => compile(source, { baseDir: dirname(basicPath) })).not.toThrow()

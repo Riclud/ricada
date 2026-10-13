@@ -3,7 +3,84 @@
 exports[`resolver / IR reference example IR snapshot 1`] = `
 {
   "config": {
+    "auth": {
+      "apiKey": {
+        "algorithm": null,
+        "audience": null,
+        "issuer": null,
+        "key": null,
+        "location": "header",
+        "name": "X-API-Key",
+        "secret": null,
+        "type": "apiKey",
+      },
+      "bearer": {
+        "algorithm": "HS256",
+        "audience": "api",
+        "issuer": null,
+        "key": null,
+        "location": null,
+        "name": null,
+        "secret": {
+          "args": [
+            {
+              "kind": "string",
+              "value": "JWT_SECRET",
+            },
+          ],
+          "kind": "call",
+          "name": "env",
+        },
+        "type": "jwt",
+      },
+    },
+    "control": {
+      "allow": [
+        "rateLimit",
+        "deny",
+        "cache",
+        "metrics",
+        "breaker",
+      ],
+      "secret": {
+        "args": [
+          {
+            "kind": "string",
+            "value": "RICADA_CONTROL_SECRET",
+          },
+        ],
+        "kind": "call",
+        "name": "env",
+      },
+    },
+    "cors": {
+      "credentials": true,
+      "headers": [
+        "Authorization",
+        "Content-Type",
+        "Idempotency-Key",
+      ],
+      "maxAge": "1h",
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+      ],
+      "origins": [],
+    },
     "out": "./generated",
+    "rateLimit": {
+      "algorithm": "tokenBucket",
+      "default": {
+        "burst": 50,
+        "key": "ip",
+        "limit": 1000,
+        "window": "1m",
+      },
+      "store": "memory",
+    },
     "raw": {
       "entries": {
         "auth": {
@@ -288,6 +365,13 @@ exports[`resolver / IR reference example IR snapshot 1`] = `
         },
       },
       "kind": "object",
+    },
+    "security": {
+      "contentSecurityPolicy": "default-src 'self'",
+      "hsts": true,
+      "referrerPolicy": "no-referrer",
+      "xContentTypeOptions": "nosniff",
+      "xFrameOptions": "DENY",
     },
     "targets": [
       "ts-server",
