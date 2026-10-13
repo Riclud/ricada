@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import { readFileSync } from "node:fs"
+import { dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { compile } from "@ricada/core"
 import { buildOpenApi } from "../src/index.ts"
@@ -29,7 +30,7 @@ interface OpenApiOperation {
   responses: Record<string, { content: { "application/json": { schema: OpenApiSchema } } }>
 }
 
-const basicIr = compile(readFileSync(basicPath, "utf-8"))
+const basicIr = compile(readFileSync(basicPath, "utf-8"), { baseDir: dirname(basicPath) })
 const doc = buildOpenApi(basicIr) as unknown as {
   paths: Record<string, Record<string, OpenApiOperation>>
   components: { schemas: Record<string, OpenApiSchema> }

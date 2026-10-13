@@ -90,7 +90,7 @@ const compileFile = async (file: string): Promise<{ ir: Ir; source: string } | n
   }
 
   try {
-    return { ir: compile(source), source }
+    return { ir: compile(source, { baseDir: pathResolve(dirname(file)) }), source }
   } catch (err) {
     printError(err, source)
     return null

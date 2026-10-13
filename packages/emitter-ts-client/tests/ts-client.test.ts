@@ -9,7 +9,7 @@ import { emitTsClient } from "../src/index.ts"
 
 const repoRoot = fileURLToPath(new URL("../../..", import.meta.url))
 const basicPath = join(repoRoot, "examples/basic.ricada")
-const ir = compile(readFileSync(basicPath, "utf-8"))
+const ir = compile(readFileSync(basicPath, "utf-8"), { baseDir: dirname(basicPath) })
 const files = emitTsClient(ir)
 const byPath = Object.fromEntries(files.map((f) => [f.path, f.contents]))
 

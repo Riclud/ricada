@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import { readFileSync } from "node:fs"
+import { dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { compile } from "../src/resolve.ts"
 import { ResolveError } from "../src/errors.ts"
@@ -75,11 +76,11 @@ type Shape = Circle | Square
 
   test("resolves the reference example without errors", () => {
     const source = readFileSync(basicPath, "utf-8")
-    expect(() => compile(source)).not.toThrow()
+    expect(() => compile(source, { baseDir: dirname(basicPath) })).not.toThrow()
   })
 
   test("reference example IR snapshot", () => {
     const source = readFileSync(basicPath, "utf-8")
-    expect(compile(source)).toMatchSnapshot()
+    expect(compile(source, { baseDir: dirname(basicPath) })).toMatchSnapshot()
   })
 })

@@ -1,0 +1,6 @@
+// Shared contracts for multi-module examples.
+//
+// This module is intentionally empty: the reference example defines all of its
+// own types, errors and config, so importing it only demonstrates that
+// cross-file modules resolve and merge without changing the IR.
+// Split shared types/enums/errors here as the contract grows.

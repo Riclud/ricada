@@ -1,4 +1,6 @@
 import { ResolveError } from "./errors.ts"
+import { loadImports } from "./module.ts"
+import type { ImportOptions } from "./module.ts"
 import { parse } from "./parse.ts"
 import { lex } from "./lexer.ts"
 import { PRIMITIVES } from "./ir.ts"
@@ -277,4 +279,7 @@ export const resolve = (ast: Ast): Ir => {
   return { version: 1, config, types, errors, routes, extensions: {} }
 }
 
-export const compile = (source: string): Ir => resolve(parse(lex(source)))
+export const compile = (source: string, opts?: ImportOptions): Ir => {
+  const ast = loadImports(parse(lex(source)), opts)
+  return resolve(ast)
+}

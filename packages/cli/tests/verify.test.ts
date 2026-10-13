@@ -2,13 +2,13 @@ import { describe, expect, test } from "bun:test"
 import { readFileSync } from "node:fs"
 import { mkdtemp, writeFile } from "node:fs/promises"
 import { tmpdir } from "node:os"
-import { join } from "node:path"
+import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { compile } from "@ricada/core"
 import { formatReport, verifyImpl } from "../src/verify.ts"
 
 const basicPath = fileURLToPath(new URL("../../../examples/basic.ricada", import.meta.url))
-const ir = compile(readFileSync(basicPath, "utf-8"))
+const ir = compile(readFileSync(basicPath, "utf-8"), { baseDir: dirname(basicPath) })
 
 const ALL_AS_ANY = `export const handlers = {
   listUsers: async () => ({} as any),

@@ -1,4 +1,5 @@
 import { fileURLToPath } from "node:url"
+import { dirname } from "node:path"
 import fs from "node:fs/promises"
 import { compile, RicadaError } from "@ricada/core"
 
@@ -7,7 +8,7 @@ const text = await fs.readFile(file, "utf-8")
 const sourceLines = text.split("\n")
 
 try {
-  const ir = compile(text)
+  const ir = compile(text, { baseDir: dirname(file) })
   console.log(JSON.stringify(ir, null, 2))
 } catch (err) {
   if (!(err instanceof RicadaError)) {

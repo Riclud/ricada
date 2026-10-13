@@ -1,5 +1,6 @@
 import { afterAll, describe, expect, test } from "bun:test"
 import { readFileSync } from "node:fs"
+import { dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { compile } from "@ricada/core"
 import { buildRegistry, exampleForFields, exampleForRef } from "../src/schema.ts"
@@ -8,7 +9,7 @@ import { formatTestReport, runTests } from "../src/test.ts"
 import type { IrObjectType } from "@ricada/core"
 
 const basicPath = fileURLToPath(new URL("../../../examples/basic.ricada", import.meta.url))
-const ir = compile(readFileSync(basicPath, "utf-8"))
+const ir = compile(readFileSync(basicPath, "utf-8"), { baseDir: dirname(basicPath) })
 const reg = buildRegistry(ir)
 
 const servers: Array<{ stop: () => void }> = []
