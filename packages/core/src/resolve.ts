@@ -262,7 +262,7 @@ export const resolve = (ast: Ast): Ir => {
         name: asText(scheme["name"]),
         algorithm: asText(scheme["algorithm"]),
         location: asText(scheme["in"]),
-        secret: scheme["secret"] ?? null,
+        secret: scheme["secret"] ?? scheme["key"] ?? null,
       }
     }
   }
