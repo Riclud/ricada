@@ -54,6 +54,22 @@ describe("lsp completion contexts", () => {
     expect(labels).not.toContain("returns")
   })
 
+  test("while typing a type, offers types filtered by prefix", () => {
+    const text = "type T {\n  a: str\n}\n"
+    const labels = labelsAt(text, 1, 8)
+    expect(labels).toContain("string")
+    expect(labels).not.toContain("@email")
+  })
+
+  test("once the type is complete, offers annotations instead of types", () => {
+    const text = "type T {\n  a: string \n}\n"
+    const labels = labelsAt(text, 1, 12)
+    expect(labels).toContain("@email")
+    expect(labels).toContain("@uuid")
+    expect(labels).not.toContain("string")
+    expect(labels).not.toContain("int")
+  })
+
   test("string field annotations are string-oriented", () => {
     const text = "type T {\n  a: string @\n}\n"
     const labels = labelsAt(text, 1, 13)

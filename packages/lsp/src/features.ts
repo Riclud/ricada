@@ -213,6 +213,7 @@ type CompletionContext =
   | { kind: "fields" }
   | { kind: "errors" }
   | { kind: "typeRef" }
+  | { kind: "value" }
   | { kind: "config" }
   | { kind: "configKeys"; keys: string[] }
   | { kind: "annotations"; scope: "field" | "route"; fieldType: string | null }
@@ -245,6 +246,29 @@ const blockContext = (header: string): CompletionContext => {
 }
 
 const isRouteScope = (context: CompletionContext): boolean => context.kind === "routeBody" || context.kind === "group"
+
+const TYPE_TOKEN_RE = /^\s*("[^"]*"|[\w.]+)(\[\])?(\?)?/
+
+const refineFieldLine = (context: CompletionContext, linePrefix: string): CompletionContext => {
+  if (linePrefix.indexOf(":") === -1) return context
+
+  if (/\|\s*[\w."']*$/.test(linePrefix)) return { kind: "typeRef" }
+
+  const rest = linePrefix.slice(linePrefix.indexOf(":") + 1)
+
+  if (rest.includes("=")) return { kind: "value" }
+
+  const match = TYPE_TOKEN_RE.exec(rest)
+  const after = match ? rest.slice(match[0].length) : ""
+
+  if (!match || after === "") return { kind: "typeRef" }
+
+  if (context.kind === "fields") {
+    return { kind: "annotations", scope: "field", fieldType: match[1]!.replace(/"/g, "") }
+  }
+
+  return context
+}
 
 export const contextAt = (source: string, position: Position): CursorContext => {
   const offset = offsetAt(source, position)
@@ -291,8 +315,7 @@ export const contextAt = (source: string, position: Position): CursorContext => 
 
   if (context.kind === "fields" || context.kind === "routeBody" || context.kind === "errors") {
     const lineStart = masked.lastIndexOf("\n", offset - 1) + 1
-    const linePrefix = source.slice(lineStart, offset)
-    if (/[\w.)\]]\s*\??\s*:/.test(linePrefix) || /\|\s*[\w.]*$/.test(linePrefix)) context = { kind: "typeRef" }
+    context = refineFieldLine(context, source.slice(lineStart, offset))
   }
 
   return { context, partial }
@@ -360,6 +383,8 @@ const contextItems = (analysis: Analysis, context: CompletionContext): Completio
       return analysis.ir ? analysis.ir.errors.map((e) => item(e.name, KIND.type, "error")) : []
     case "typeRef":
       return typeItems(analysis)
+    case "value":
+      return []
     case "config":
       return keywordItems(CONFIG_KEYS)
     case "configKeys":
