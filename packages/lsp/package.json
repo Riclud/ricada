@@ -1,0 +1,21 @@
+{
+  "name": "@ricada/lsp",
+  "version": "0.0.0",
+  "description": "Language server for Ricada contracts (diagnostics, completion, hover, go-to-definition)",
+  "type": "module",
+  "module": "./src/server.ts",
+  "main": "./src/server.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "bin": {
+    "ricada-lsp": "./src/server.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@ricada/core": "workspace:*"
+  }
+}

@@ -12,6 +12,7 @@
     "gen": "bun run packages/cli/src/bin.ts gen examples/basic.ricada",
     "mock": "bun run packages/cli/src/bin.ts mock examples/basic.ricada",
     "test:api": "bun run packages/cli/src/bin.ts test examples/basic.ricada",
+    "lsp": "bun run packages/lsp/src/server.ts --stdio",
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
     "lint": "eslint .",
@@ -26,6 +27,7 @@
     "@ricada/emitter-ts-client": "workspace:*",
     "@ricada/emitter-ts-common": "workspace:*",
     "@ricada/emitter-ts-server": "workspace:*",
+    "@ricada/lsp": "workspace:*",
     "@ricada/runtime": "workspace:*"
   },
   "devDependencies": {
